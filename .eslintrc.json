@@ -16,6 +16,7 @@
         "indent": ["error", 4],
         "quotes": ["error", "double"],
         "semi": ["error", "always"],
-        "no-console": "warn"
+        "no-console": "warn",
+        "react/react-in-jsx-scope": 0
     }
 }
