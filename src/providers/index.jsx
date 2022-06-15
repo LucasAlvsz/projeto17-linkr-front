@@ -1,5 +1,7 @@
 import React from "react";
 
-export default function AppProvider() {
-    return <></>;
+import { TrendingProvider } from "./TrendingProvider";
+
+export default function AppProvider({ children }) {
+    return <TrendingProvider>{children}</TrendingProvider>;
 }
