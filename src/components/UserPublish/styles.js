@@ -1,11 +1,7 @@
 import styled from "styled-components";
 
-export const TelaCinza = styled.div`
-    background-color: gray;
-    width: 100vw;
-    height: 100vh;
+export const BoxPublish = styled.div`
     display: flex;
-    justify-content: center;
 `;
 
 export const Container = styled.div`
@@ -33,7 +29,7 @@ export const teste = styled.div`
         height: 31px;
         border-radius: 5px;
         border: none;
-        background-color: #1877f2;
+        background-color: var(--color-buttons);
         color: white;
         font-weight: bold;
     }
@@ -44,8 +40,6 @@ export const Forms = styled.div`
     background-color: blue;
 `;
 export const Right = styled.div`
-    // display: flex;
-    background-color: green;
     width: 80%;
     height: 100%;
     margin-left: 10px;
