@@ -23,7 +23,7 @@ export const TrendingHeader = styled.header`
 `;
 
 export const TrendingHashtagsContainer = styled.div`
-    width: 100%;
+    width: auto;
     height: 100%;
     padding-left: 16px;
     margin-top: 22px;
@@ -37,4 +37,5 @@ export const TrendingHashtag = styled.p`
     letter-spacing: 0.05em;
     color: #ffffff;
     margin-bottom: 8px;
+    cursor: pointer;
 `;
