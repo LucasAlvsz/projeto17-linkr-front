@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import device from "../../utils/devicesSizes";
 
 export const Header = styled.header`
     width: 100%;
@@ -20,7 +21,7 @@ export const Logo = styled.h1`
     line-height: 50px;
     letter-spacing: 0.05em;
     color: var(--secondary-color);
-    @media (min-width: 500px) {
+    @media ${device.mobile} {
         font-size: 49px;
         line-height: 54px;
     }
@@ -40,7 +41,7 @@ export const UserOptionsContainer = styled.div`
         color: var(--secondary-color);
         cursor: pointer;
     }
-    @media (min-width: 500px) {
+    @media ${device.mobile} {
         .options-icon {
             font-size: 18.5px;
         }
@@ -52,7 +53,7 @@ export const UserIcon = styled.img`
     width: 44px;
     height: 44px;
     border-radius: 26.5px;
-    @media (min-width: 500px) {
+    @media ${device.mobile} {
         width: 53px;
         height: 53px;
     }
