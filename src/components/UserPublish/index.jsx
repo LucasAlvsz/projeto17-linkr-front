@@ -20,20 +20,16 @@ const UserPublish = () => {
                                 placeholder="  Awesome article about #javascript"
                             ></input>
                         </S.Inputs>
-                        <Button />
+                        <S.Button>
+                            <button type="submit" className="PublishButton">
+                                Publish
+                            </button>
+                        </S.Button>
                     </S.Form>
                 </S.Data>
             </S.Container>
         </S.BoxPublish>
     );
 };
-const Button = function CreateButton() {
-    return (
-        <S.Button>
-            <button type="submit" className="PublishButton">
-                Publish
-            </button>
-        </S.Button>
-    );
-};
+
 export default UserPublish;
