@@ -2,7 +2,7 @@ import React from "react";
 
 import AppProvider from "./providers";
 
-import GlobalStyles from "./styles/GlobalStyle";
+import GlobalStyles from "./GlobalStyles";
 import Routes from "./routes";
 
 export default function App() {
