@@ -1,6 +1,18 @@
+import { useState } from "react";
+
 import * as S from "./styles";
+
 const UserPublish = () => {
-    const publishSubmit = () => {};
+    // eslint-disable-next-line no-unused-vars
+    const [disabled, setDisabled] = useState(false);
+    const [inputs, setInputs] = useState({
+        url: "",
+        article: "",
+    });
+    const publishSubmit = (e) => {
+        e.preventDefault();
+        alert({ inputs });
+    };
     return (
         <S.BoxPublish>
             <S.Container>
@@ -10,18 +22,38 @@ const UserPublish = () => {
                         <S.Inputs>
                             <input
                                 type="url"
+                                disabled={disabled}
                                 className="inputUrl"
+                                value={inputs.url}
+                                onChange={(e) => {
+                                    setInputs({
+                                        ...inputs,
+                                        url: e.target.value,
+                                    });
+                                }}
                                 placeholder="  http://..."
                                 required
                             ></input>
                             <input
                                 type="text"
+                                disabled={disabled}
                                 className="inputArticle"
+                                value={inputs.article}
+                                onChange={(e) => {
+                                    setInputs({
+                                        ...inputs,
+                                        article: e.target.value,
+                                    });
+                                }}
                                 placeholder="  Awesome article about #javascript"
                             ></input>
                         </S.Inputs>
                         <S.Button>
-                            <button type="submit" className="PublishButton">
+                            <button
+                                type="submit"
+                                disabled={disabled}
+                                className="PublishButton"
+                            >
                                 Publish
                             </button>
                         </S.Button>
