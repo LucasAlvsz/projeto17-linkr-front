@@ -6,7 +6,15 @@ export default createGlobalStyle`
     * {
         box-sizing: border-box;
         text-decoration: none;
+        outline: 0;
+        margin: 0;
+        padding: 0;
     }
+    
+    button {
+        cursor: pointer;
+    }
+
     html, body, #root {
         background-color:#333333;
         height: 100vh;
