@@ -26,7 +26,7 @@ export default createGlobalStyle`
         --color-input: #EFEFEF;
         --color-header:#151515;
         --color-button: #1877F2;
-        --prymary-font: font-family: "Lato", sans-serif;
-        --secondary-font: font-family: "Oswald", sans-serif;
+        --prymary-font: "Lato", sans-serif;
+        --secondary-font: "Oswald", sans-serif;
     }
 `;
