@@ -6,10 +6,14 @@ export const Main = styled.main`
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: auto;
     margin-top: 72px;
+    /* padding-top: 72px; */
 `;
 
 export const HashtagName = styled.h1`
+    width: 100%;
+    height: auto;
     font-family: var(--secondary-font);
     font-weight: 700;
     font-size: 43px;
@@ -23,5 +27,5 @@ export const PostsContainer = styled.div`
     height: 100%;
     display: flex;
     flex-direction: column;
-    margin-bottom: 16px;
+    align-items: center;
 `;

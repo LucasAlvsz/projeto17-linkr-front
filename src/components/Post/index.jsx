@@ -1,17 +1,14 @@
 import * as S from "./styles";
 
-const Post = () => {
+const Post = ({ image, name, article, link }) => {
     return (
         <S.PostContainer>
             <S.PostSideContainer>
-                <S.PostUserImage src="https://i.pinimg.com/originals/5a/39/3d/5a393d60dab143a9521500b29d5edad6.jpg" />
+                <S.PostUserImage src={image} />
             </S.PostSideContainer>
             <S.PostContentContainer>
-                <S.PostUserName>Akali</S.PostUserName>
-                <S.PostText>
-                    Muito maneiro esse tutorial de Material UI com React, deem
-                    uma olhada! #react #material
-                </S.PostText>
+                <S.PostUserName>{name}</S.PostUserName>
+                <S.PostText>{article}</S.PostText>
                 <S.PostLinkPreviewContainer>
                     <S.PostLinkContent>
                         <span>
@@ -24,9 +21,7 @@ const Post = () => {
                                 making you click through to another page.
                             </S.PostLinkDescription>
                         </span>
-                        <S.PostLinkUrl href="https://medium.com/@pshrmn/a-simple-react-router">
-                            https://medium.com/@pshrmn/a-simple-react-router
-                        </S.PostLinkUrl>
+                        <S.PostLinkUrl href={link}>{link}</S.PostLinkUrl>
                     </S.PostLinkContent>
                     <S.PostLinkImage src="https://i.pinimg.com/originals/5a/39/3d/5a393d60dab143a9521500b29d5edad6.jpg" />
                 </S.PostLinkPreviewContainer>

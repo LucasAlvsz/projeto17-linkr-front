@@ -8,6 +8,7 @@ export const PostContainer = styled.div`
     align-items: center;
     background-color: var(--primary-color);
     padding: 10px 15px 15px;
+    margin-bottom: 16px;
     @media ${device.mobile} {
         max-width: 611px;
         height: 276px;
