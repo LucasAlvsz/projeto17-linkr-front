@@ -4,7 +4,8 @@ import React from "react";
 import Template from "../pages/Template";
 import UserPublish from "../components/UserPublish";
 
-import Trending from "../components/Trending";
+//import Trending from "../components/Trending";
+import Header from "../components/Header";
 
 export default function Router() {
     return (
@@ -12,7 +13,7 @@ export default function Router() {
             <Routes>
                 <Route path="/" element={<Template />} />
                 <Route path="/timeline" element={<UserPublish />} />
-                <Route path="/testes" element={<Trending />} />
+                <Route path="/testes" element={<Header />} />
             </Routes>
         </BrowserRouter>
     );
