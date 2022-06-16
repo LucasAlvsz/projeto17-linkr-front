@@ -4,7 +4,7 @@ const Post = () => {
     return (
         <S.PostContainer>
             <S.PostSideContainer>
-                <S.PostImage src="https://i.pinimg.com/originals/5a/39/3d/5a393d60dab143a9521500b29d5edad6.jpg" />
+                <S.PostUserImage src="https://i.pinimg.com/originals/5a/39/3d/5a393d60dab143a9521500b29d5edad6.jpg" />
             </S.PostSideContainer>
             <S.PostContentContainer>
                 <S.PostUserName>Akali</S.PostUserName>

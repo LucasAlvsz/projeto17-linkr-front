@@ -24,7 +24,7 @@ export const PostSideContainer = styled.div`
     align-items: center;
 `;
 
-export const PostImage = styled.img`
+export const PostUserImage = styled.img`
     width: 40px;
     height: 40px;
     border-radius: 26.5px;
