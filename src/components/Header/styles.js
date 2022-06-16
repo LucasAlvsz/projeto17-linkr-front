@@ -20,6 +20,10 @@ export const Logo = styled.h1`
     line-height: 50px;
     letter-spacing: 0.05em;
     color: var(--secondary-color);
+    @media (min-width: 500px) {
+        font-size: 49px;
+        line-height: 54px;
+    }
 `;
 
 export const UserContainer = styled.div`
@@ -35,6 +39,9 @@ export const UserOptionsContainer = styled.div`
         font-size: 25px;
         color: var(--secondary-color);
         cursor: pointer;
+        @media (min-width: 500px) {
+            font-size: 18.5px;
+        }
     }
 `;
 
@@ -42,4 +49,8 @@ export const UserIcon = styled.img`
     width: 44px;
     height: 44px;
     border-radius: 26.5px;
+    @media (min-width: 500px) {
+        width: 53px;
+        height: 53px;
+    }
 `;
