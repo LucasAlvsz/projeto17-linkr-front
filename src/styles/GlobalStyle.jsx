@@ -13,8 +13,10 @@ export default createGlobalStyle`
         width: 100vw;
     }
     :root {
-        --color-backScreen: #333333;
+        --primary-color: #171717;
+        --secondary-color:#FFFFFF;
+        --color-input: #EFEFEF;
         --color-header:#151515;
-        --color-buttons: #1877F2;
+        --color-button: #1877F2;
     }
 `;
