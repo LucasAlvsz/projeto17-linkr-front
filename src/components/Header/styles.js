@@ -39,9 +39,12 @@ export const UserOptionsContainer = styled.div`
         font-size: 25px;
         color: var(--secondary-color);
         cursor: pointer;
-        @media (min-width: 500px) {
+    }
+    @media (min-width: 500px) {
+        .options-icon {
             font-size: 18.5px;
         }
+        margin-right: 17px;
     }
 `;
 
