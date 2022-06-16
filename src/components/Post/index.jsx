@@ -14,14 +14,16 @@ const Post = () => {
                 </S.PostText>
                 <S.PostLinkPreviewContainer>
                     <S.PostLinkContent>
-                        <S.PostLinkTitle>
-                            Como aplicar o Material UI em um projeto React
-                        </S.PostLinkTitle>
-                        <S.PostLinkDescription>
-                            Hey! I have moved this tutorial to my personal blog.
-                            Same content, new location. Sorry about making you
-                            click through to another page.
-                        </S.PostLinkDescription>
+                        <span>
+                            <S.PostLinkTitle>
+                                Como aplicar o Material UI em um projeto React
+                            </S.PostLinkTitle>
+                            <S.PostLinkDescription>
+                                Hey! I have moved this tutorial to my personal
+                                blog. Same content, new location. Sorry about
+                                making you click through to another page.
+                            </S.PostLinkDescription>
+                        </span>
                         <S.PostLinkUrl href="https://medium.com/@pshrmn/a-simple-react-router">
                             https://medium.com/@pshrmn/a-simple-react-router
                         </S.PostLinkUrl>
