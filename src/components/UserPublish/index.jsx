@@ -1,23 +1,33 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { PublishContext } from "../../providers/UserPublishProvider";
 
 import * as S from "./styles";
 
 const UserPublish = () => {
-    // eslint-disable-next-line no-unused-vars
+    const { publishSubmit } = useContext(PublishContext);
     const [disabled, setDisabled] = useState(false);
     const [inputs, setInputs] = useState({
         url: "",
         article: "",
     });
-    const publishSubmit = (e) => {
+    const formSubmit = (e) => {
+        setDisabled(true);
         e.preventDefault();
-        alert({ inputs });
+        const data = {
+            url: inputs.url,
+            article: inputs.article.length === 0 ? " " : inputs.article,
+        };
+        const sendPublish = publishSubmit(data);
+        console.log(sendPublish);
+        // eslint-disable-next-line no-undef
+        setInputs({ url: "", article: "" });
+        setDisabled(false);
     };
     return (
         <S.BoxPublish>
             <S.Container>
                 <S.Data>
-                    <S.Form onSubmit={publishSubmit}>
+                    <S.Form onSubmit={formSubmit}>
                         <p>What are you going to share today?</p>
                         <S.Inputs>
                             <input
@@ -54,7 +64,7 @@ const UserPublish = () => {
                                 disabled={disabled}
                                 className="PublishButton"
                             >
-                                Publish
+                                {disabled ? "Publishing..." : "Publish"}
                             </button>
                         </S.Button>
                     </S.Form>
