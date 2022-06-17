@@ -1,6 +1,6 @@
 import * as S from "./styles";
 
-const Post = ({ image, name, article, link }) => {
+const Post = ({ image, name, text, link }) => {
     return (
         <S.PostContainer>
             <S.PostSideContainer>
@@ -8,7 +8,7 @@ const Post = ({ image, name, article, link }) => {
             </S.PostSideContainer>
             <S.PostContentContainer>
                 <S.PostUserName>{name}</S.PostUserName>
-                <S.PostText>{article}</S.PostText>
+                <S.PostText>{text}</S.PostText>
                 <S.PostLinkPreviewContainer>
                     <S.PostLinkContent>
                         <span>
