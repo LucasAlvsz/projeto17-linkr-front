@@ -1,9 +1,11 @@
 const minSize = {
-    mobile: "611px",
+    desktop: "611px",
+    sidebar: "970px",
 };
 
 const device = {
-    mobile: `(min-width: ${minSize.mobile})`,
+    desktop: `(min-width: ${minSize.desktop})`,
+    sidebar: `(min-width: ${minSize.sidebar})`,
 };
 
 export default device;
