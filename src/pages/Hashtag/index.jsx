@@ -24,15 +24,25 @@ const Hashtag = () => {
                 <S.ContentContainer>
                     <S.PostsContainer>
                         <S.HashtagName># {hashtag}</S.HashtagName>
-                        {hashtagPosts.map(({ id, article, link }) => (
-                            <Post
-                                key={id}
-                                image="https://i.pinimg.com/originals/5a/39/3d/5a393d60dab143a9521500b29d5edad6.jpg"
-                                name={"Akali"}
-                                text={article}
-                                link={link}
-                            />
-                        ))}
+                        {hashtagPosts.map(
+                            ({
+                                id,
+                                username,
+                                userpic,
+                                article,
+                                link,
+                                urlMetadata,
+                            }) => (
+                                <Post
+                                    key={id}
+                                    username={username}
+                                    userpic={userpic}
+                                    text={article}
+                                    link={link}
+                                    urlMetadata={urlMetadata}
+                                />
+                            ),
+                        )}
                     </S.PostsContainer>
                     <S.SidebarContainer>
                         <Trending />
