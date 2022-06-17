@@ -1,3 +1,5 @@
+import ReactHashtag from "react-hashtag";
+
 import * as S from "./styles";
 
 const Post = ({ username, userpic, article, link, urlMetadata }) => {
@@ -8,7 +10,9 @@ const Post = ({ username, userpic, article, link, urlMetadata }) => {
             </S.PostSideContainer>
             <S.PostContentContainer>
                 <S.PostUserName>{username}</S.PostUserName>
-                <S.PostText>{article}</S.PostText>
+                <S.PostText>
+                    <ReactHashtag>{article}</ReactHashtag>
+                </S.PostText>
                 <S.PostLinkPreviewContainer>
                     <S.PostLinkContent>
                         <span>

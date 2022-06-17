@@ -37,7 +37,7 @@ const Hashtag = () => {
                                     key={id}
                                     username={username}
                                     userpic={userpic}
-                                    text={article}
+                                    article={article}
                                     link={link}
                                     urlMetadata={urlMetadata}
                                 />
