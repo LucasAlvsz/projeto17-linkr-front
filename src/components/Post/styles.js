@@ -8,7 +8,8 @@ export const PostContainer = styled.div`
     align-items: center;
     background-color: var(--primary-color);
     padding: 10px 15px 15px;
-    @media ${device.mobile} {
+    margin-bottom: 16px;
+    @media ${device.desktop} {
         max-width: 611px;
         height: 276px;
         padding: 18px;
@@ -24,11 +25,11 @@ export const PostSideContainer = styled.div`
     align-items: center;
 `;
 
-export const PostImage = styled.img`
+export const PostUserImage = styled.img`
     width: 40px;
     height: 40px;
     border-radius: 26.5px;
-    @media ${device.mobile} {
+    @media ${device.desktop} {
         width: 50px;
         height: 50px;
     }
@@ -41,7 +42,7 @@ export const PostContentContainer = styled.div`
     flex-direction: column;
     justify-content: space-between;
     padding-left: 15px;
-    @media ${device.mobile} {
+    @media ${device.desktop} {
         padding-left: 18px;
     }
 `;
@@ -51,9 +52,9 @@ export const PostUserName = styled.p`
     font-weight: 400;
     font-size: 17px;
     line-height: 20px;
-    color: #ffffff;
+    color: var(--secondary-color);
     margin-bottom: 7px;
-    @media ${device.mobile} {
+    @media ${device.desktop} {
         font-size: 19px;
         line-height: 23px;
     }
@@ -66,7 +67,7 @@ export const PostText = styled.p`
     line-height: 18px;
     color: #b7b7b7;
     margin-bottom: 13px;
-    @media ${device.mobile} {
+    @media ${device.desktop} {
         font-size: 17px;
         line-height: 20px;
     }
@@ -78,7 +79,7 @@ export const PostLinkPreviewContainer = styled.div`
     display: flex;
     border: 1px solid #4d4d4d;
     border-radius: 11px;
-    @media ${device.mobile} {
+    @media ${device.desktop} {
         width: 503px;
         height: 155px;
     }
@@ -92,18 +93,19 @@ export const PostLinkContent = styled.div`
     justify-content: space-between;
     padding: 7px 11px;
     font-weight: 400;
-    @media ${device.mobile} {
+    @media ${device.desktop} {
         padding: 24px 20px;
     }
 `;
 
 export const PostLinkTitle = styled.h1`
+    width: 100%;
     font-family: var(--primary-font);
     font-size: 11px;
     line-height: 13px;
     color: #cecece;
     margin-bottom: 5px;
-    @media ${device.mobile} {
+    @media ${device.desktop} {
         font-size: 16px;
         line-height: 19px;
     }
@@ -115,7 +117,7 @@ export const PostLinkDescription = styled.p`
     line-height: 11px;
     color: #9b9595;
     margin-bottom: 5px;
-    @media ${device.mobile} {
+    @media ${device.desktop} {
         font-size: 11px;
         line-height: 13px;
     }
@@ -126,7 +128,7 @@ export const PostLinkUrl = styled.a`
     font-size: 9px;
     line-height: 11px;
     color: #cecece;
-    @media ${device.mobile} {
+    @media ${device.desktop} {
         font-size: 11px;
         line-height: 13px;
     }
@@ -136,7 +138,7 @@ export const PostLinkImage = styled.img`
     width: 95px;
     height: 115px;
     border-radius: 0px 12px 13px 0px;
-    @media ${device.mobile} {
+    @media ${device.desktop} {
         width: 155px;
         height: 155px;
     }
