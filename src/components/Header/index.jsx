@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import { IoChevronDownOutline as UserOptionsButton } from "react-icons/io5";
 import HeaderOptions from "../HeaderOptions";
+import SearchBar from "../SearchBar";
 
 import * as S from "./styles";
 
@@ -10,6 +11,7 @@ const Header = () => {
     return (
         <S.Header>
             <S.Logo>linkr</S.Logo>
+            <SearchBar />
             <S.UserContainer>
                 <S.UserOptionsContainer>
                     <UserOptionsButton
