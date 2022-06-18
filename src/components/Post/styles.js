@@ -2,7 +2,7 @@ import styled from "styled-components";
 import device from "../../utils/devicesSizes";
 
 export const PostContainer = styled.div`
-    width: 100%;
+    width: 100vw;
     height: 232px;
     display: flex;
     align-items: center;

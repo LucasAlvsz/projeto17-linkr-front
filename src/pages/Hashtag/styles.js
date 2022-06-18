@@ -19,10 +19,13 @@ export const HashtagName = styled.h1`
     line-height: 49px;
     color: var(--secondary-color);
     margin: 19px 17px 19px;
+    margin-top: calc(45px + 19px);
+    padding-left: 17px;
     @media ${device.desktop} {
         font-size: 43px;
         line-height: 64px;
         margin: 53px 0 41px;
+        padding-left: 0;
     }
 `;
 
