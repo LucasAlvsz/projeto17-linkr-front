@@ -2,10 +2,11 @@ import { useState, useContext } from "react";
 import { PublishContext } from "../../providers/UserPublishProvider";
 
 import * as S from "./styles";
-
-const UserPublish = () => {
-    const { publishSubmit } = useContext(PublishContext);
+const UserPublish = ({ imageUser, setReload }) => {
+    const { publishSubmit, response } = useContext(PublishContext);
     const [disabled, setDisabled] = useState(false);
+    const [boolean, setboolean] = useState(false);
+
     const [inputs, setInputs] = useState({
         url: "",
         article: "",
@@ -17,16 +18,21 @@ const UserPublish = () => {
             url: inputs.url,
             article: inputs.article.length === 0 ? " " : inputs.article,
         };
-        const sendPublish = publishSubmit(data);
-        console.log(sendPublish);
+        // missing send Token
+        publishSubmit(data);
         // eslint-disable-next-line no-undef
-        setInputs({ url: "", article: "" });
+        if (!response) {
+            setInputs({ url: "", article: "" });
+        }
         setDisabled(false);
     };
     return (
         <S.BoxPublish>
             <S.Container>
                 <S.Data>
+                    <S.ImageUser>
+                        <img src={imageUser} alt="carequinha" />
+                    </S.ImageUser>
                     <S.Form onSubmit={formSubmit}>
                         <p>What are you going to share today?</p>
                         <S.Inputs>
@@ -60,6 +66,10 @@ const UserPublish = () => {
                         </S.Inputs>
                         <S.Button>
                             <button
+                                onClick={() => {
+                                    setReload(!boolean);
+                                    setboolean(!boolean);
+                                }}
                                 type="submit"
                                 disabled={disabled}
                                 className="PublishButton"

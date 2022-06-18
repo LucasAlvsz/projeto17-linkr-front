@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 import { createContext, useState } from "react";
 import axios from "axios";
 export const PublishContext = createContext();
@@ -5,8 +8,14 @@ export const PublishContext = createContext();
 export const UserPublishProvider = ({ children }) => {
     const [response, setResponse] = useState(false);
     const publishSubmit = (data) => {
-        // eslint-disable-next-line no-undef
-        // `${process.env.REACT_APP_URI}/post`
+        // missing token
+        // localStorage.getItem
+        const token = localStorage.getItem("token");
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
         const promise = axios.post(`${process.env.REACT_APP_URI}/post`, data);
         promise.then((response) => {
             console.log(response.data);
@@ -15,11 +24,11 @@ export const UserPublishProvider = ({ children }) => {
             setResponse(true);
             alert("Houve um erro ao publicar seu link");
             console.log(e.data);
+            return true;
         });
-        return response;
     };
     return (
-        <PublishContext.Provider value={{ publishSubmit }}>
+        <PublishContext.Provider value={{ publishSubmit, response }}>
             {children}
         </PublishContext.Provider>
     );
