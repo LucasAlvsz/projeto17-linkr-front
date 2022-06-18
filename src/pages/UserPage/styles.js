@@ -7,25 +7,28 @@ export const Main = styled.main`
     display: flex;
     flex-direction: column;
     overflow: auto;
-    margin-top: 72px;
+    margin-top: calc(72px + 74px);
+    @media ${device.desktop} {
+        margin-top: 72px;
+    }
 `;
 
-export const HashtagName = styled.h1`
+export const UserData = styled.h1`
     width: 100%;
     display: flex;
+    align-items: center;
     font-family: var(--secondary-font);
     font-weight: 700;
     font-size: 33px;
     line-height: 49px;
     color: var(--secondary-color);
     margin: 19px 17px 19px;
-    margin-top: calc(45px + 19px);
-    padding-left: 17px;
+    display: none;
     @media ${device.desktop} {
         font-size: 43px;
         line-height: 64px;
         margin: 53px 0 41px;
-        padding-left: 0;
+        display: flex;
     }
 `;
 
@@ -54,5 +57,38 @@ export const SidebarContainer = styled.div`
         height: 100%;
         display: flex;
         margin-top: 158px;
+    }
+`;
+
+export const UserImage = styled.div`
+    width: 40px;
+    height: 40px;
+    margin: 0 18px;
+    border-radius: 26.5px;
+    background-image: url(${({ src }) => src});
+    background-size: cover;
+    background-position: center;
+    @media ${device.desktop} {
+        width: 50px;
+        height: 50px;
+    }
+`;
+
+export const UserPublishContainer = styled.div`
+    margin-bottom: 16px;
+    @media ${device.desktop} {
+        display: none;
+    }
+`;
+
+export const TimelineContainer = styled.span`
+    margin-bottom: 19px;
+    font-family: var(--secondary-font);
+    font-weight: 700;
+    font-size: 33px;
+    margin-left: 17px;
+    color: #ffffff;
+    @media ${device.desktop} {
+        display: none;
     }
 `;

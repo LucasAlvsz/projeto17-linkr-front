@@ -3,10 +3,17 @@ import device from "../../utils/devicesSizes";
 
 const SearchBarContainer = styled.div`
     justify-content: center;
-    position: relative;
-    width: 350px;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    width: 93%;
+    margin-top: calc(45px + 72px + 10px);
     @media ${device.desktop} {
         width: 563px;
+        position: relative;
+        margin-top: 0;
     }
 
     .search-icon {
@@ -41,10 +48,7 @@ const SearchBarDataResult = styled.div`
         margin-bottom: 16px;
         display: flex;
         align-items: center;
-        color: inherit;
-        a:visited {
-            color: inherit;
-        }
+        cursor: pointer;
 
         p {
             margin-left: 12px;
@@ -73,9 +77,10 @@ const SearchBarContainerInput = styled.div`
     position: relative;
     background-color: #e7e7e7;
     border-radius: 8px;
+    min-width: 93%;
 
     .searchBar-input {
-        width: 350px;
+        width: 100%;
         height: 45px;
         border-radius: 8px;
         border: none;
@@ -83,9 +88,6 @@ const SearchBarContainerInput = styled.div`
         background: var(--secondary-color);
         font-family: var(--primary-font);
         font-size: 17px;
-        @media ${device.desktop} {
-            width: 563px;
-        }
 
         &:focus {
             outline: none;
