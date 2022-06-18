@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { IoChevronDownOutline as UserOptionsButton } from "react-icons/io5";
-import HeaderOptions from "../HeaderOptions";
+import HeaderOptions from "./HeaderOptions";
 
 import * as S from "./styles";
 
