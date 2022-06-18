@@ -1,4 +1,6 @@
 /* eslint-disable no-undef */
+/* eslint-disable no-console */
+
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
 
@@ -9,18 +11,19 @@ export const UserPageProvider = ({ children }) => {
     const [userPosts, setUserPosts] = useState([]);
 
     useEffect((userId) => {
-        axios
-            .get(`${process.env.REACT_APP_URI}/user/:${userId}`)
-            .then(({ data }) => {
-                setUserPosts(data);
-            })
-            .catch(({ response }) => {
-                console.log(response);
-            });
+        if (userId !== undefined) {
+            axios
+                .get(`${process.env.REACT_APP_URI}/user/:${userId}`)
+                .then(({ data }) => {
+                    setUserPosts(data);
+                })
+                .catch(({ response }) => {
+                    console.log(response);
+                });
+        }
     }, []);
 
     const getUsersSearchBar = async (search) => {
-        console.log(search);
         try {
             const users = await axios.get(
                 `${process.env.REACT_APP_URI}/user/?search=${search}`,
