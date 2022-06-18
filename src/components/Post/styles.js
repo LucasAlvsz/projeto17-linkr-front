@@ -25,10 +25,13 @@ export const PostSideContainer = styled.div`
     align-items: center;
 `;
 
-export const PostUserImage = styled.img`
+export const PostUserImage = styled.div`
     width: 40px;
     height: 40px;
     border-radius: 26.5px;
+    background-image: url(${({ src }) => src});
+    background-size: cover;
+    background-position: center;
     @media ${device.desktop} {
         width: 50px;
         height: 50px;
@@ -67,18 +70,27 @@ export const PostText = styled.p`
     line-height: 18px;
     color: #b7b7b7;
     margin-bottom: 13px;
+    > span {
+        font-weight: 700;
+        color: var(--secondary-color);
+        cursor: pointer;
+        :hover {
+            text-decoration: underline;
+        }
+    }
     @media ${device.desktop} {
         font-size: 17px;
         line-height: 20px;
     }
 `;
 
-export const PostLinkPreviewContainer = styled.div`
+export const PostLinkPreviewContainer = styled.a`
     width: 100%;
     height: 115px;
     display: flex;
     border: 1px solid #4d4d4d;
     border-radius: 11px;
+    cursor: pointer;
     @media ${device.desktop} {
         width: 503px;
         height: 155px;
@@ -123,11 +135,14 @@ export const PostLinkDescription = styled.p`
     }
 `;
 
-export const PostLinkUrl = styled.a`
+export const PostLinkUrl = styled.p`
     font-family: var(--primary-font);
     font-size: 9px;
     line-height: 11px;
     color: #cecece;
+    :hover {
+        text-decoration: underline;
+    }
     @media ${device.desktop} {
         font-size: 11px;
         line-height: 13px;

@@ -1,8 +1,15 @@
+import { useNavigate } from "react-router-dom";
 import ReactHashtag from "react-hashtag";
 
 import * as S from "./styles";
 
 const Post = ({ username, userpic, article, link, urlMetadata }) => {
+    const navigate = useNavigate();
+    // garbiel vai usar depois
+    // window.scrollTo({
+    //     top: 0,
+    //     behavior: "smooth",
+    // });
     return (
         <S.PostContainer>
             <S.PostSideContainer>
@@ -11,9 +18,19 @@ const Post = ({ username, userpic, article, link, urlMetadata }) => {
             <S.PostContentContainer>
                 <S.PostUserName>{username}</S.PostUserName>
                 <S.PostText>
-                    <ReactHashtag>{article}</ReactHashtag>
+                    <ReactHashtag
+                        onHashtagClick={(hashtagValue) =>
+                            navigate(
+                                `/hashtag/${hashtagValue
+                                    .replace("#", "")
+                                    .toLowerCase()}`,
+                            )
+                        }
+                    >
+                        {article}
+                    </ReactHashtag>
                 </S.PostText>
-                <S.PostLinkPreviewContainer>
+                <S.PostLinkPreviewContainer href={link} target="_blank">
                     <S.PostLinkContent>
                         <span>
                             <S.PostLinkTitle>
@@ -23,7 +40,7 @@ const Post = ({ username, userpic, article, link, urlMetadata }) => {
                                 {urlMetadata.description}
                             </S.PostLinkDescription>
                         </span>
-                        <S.PostLinkUrl href={link}>{link}</S.PostLinkUrl>
+                        <S.PostLinkUrl>{link}</S.PostLinkUrl>
                     </S.PostLinkContent>
                     <S.PostLinkImage src={urlMetadata.image} />
                 </S.PostLinkPreviewContainer>
