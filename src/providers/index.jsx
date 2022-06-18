@@ -1,11 +1,15 @@
 import React from "react";
+import { UserPublishProvider } from "./UserPublishProvider";
 
 import { TrendingProvider } from "./TrendingProvider";
-import { UserPublishProvider } from "./UserPublishProvider";
+import { UserPageProvider } from "./UserPageProvider";
+
 export default function AppProvider({ children }) {
     return (
         <UserPublishProvider>
-            <TrendingProvider>{children}</TrendingProvider>
+            <TrendingProvider>
+                <UserPageProvider>{children}</UserPageProvider>
+            </TrendingProvider>
         </UserPublishProvider>
     );
 }
