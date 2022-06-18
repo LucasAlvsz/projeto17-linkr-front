@@ -3,7 +3,7 @@ import ReactHashtag from "react-hashtag";
 
 import * as S from "./styles";
 
-const Post = ({ username, userpic, article, link, urlMetadata }) => {
+const Post = ({ username, userpic, userid, article, link, urlMetadata }) => {
     const navigate = useNavigate();
     // garbiel vai usar depois
     // window.scrollTo({
@@ -13,10 +13,15 @@ const Post = ({ username, userpic, article, link, urlMetadata }) => {
     return (
         <S.PostContainer>
             <S.PostSideContainer>
-                <S.PostUserImage src={userpic} />
+                <S.PostUserImage
+                    src={userpic}
+                    onClick={() => navigate(`/user/${userid}`)}
+                />
             </S.PostSideContainer>
             <S.PostContentContainer>
-                <S.PostUserName>{username}</S.PostUserName>
+                <S.PostUserName onClick={() => navigate(`/user/${userid}`)}>
+                    {username}
+                </S.PostUserName>
                 <S.PostText>
                     <ReactHashtag
                         onHashtagClick={(hashtagValue) =>

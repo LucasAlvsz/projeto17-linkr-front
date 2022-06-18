@@ -3,11 +3,13 @@ import * as S from "./styles";
 import { AiOutlineSearch } from "react-icons/ai";
 import { DebounceInput } from "react-debounce-input";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { UserPageContext } from "../../providers/UserPageProvider";
 
 // eslint-disable-next-line no-unused-vars
 const SearchBar = () => {
+    const navigate = useNavigate();
     const { getUsersSearchBar, usersSearchBar } = useContext(UserPageContext);
 
     return (
@@ -19,6 +21,7 @@ const SearchBar = () => {
                     onChange={(event) => getUsersSearchBar(event.target.value)}
                     placeholder="Search for people"
                     className="searchBar-input"
+                    type="text"
                 />
                 <AiOutlineSearch className="search-icon" />
             </S.SearchBarContainerInput>
@@ -26,7 +29,10 @@ const SearchBar = () => {
                 {usersSearchBar.map((user, key) => {
                     return (
                         <a
-                            href={`${process.env.REACT_APP_URI}/user/${user.id}`}
+                            onClick={() => {
+                                getUsersSearchBar("");
+                                navigate(`/user/${user.id}`);
+                            }}
                             key={key}
                         >
                             <S.UserImage src={user.userpic}></S.UserImage>

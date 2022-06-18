@@ -32,6 +32,7 @@ export const PostUserImage = styled.div`
     background-image: url(${({ src }) => src});
     background-size: cover;
     background-position: center;
+    cursor: pointer;
     @media ${device.desktop} {
         width: 50px;
         height: 50px;
@@ -57,6 +58,7 @@ export const PostUserName = styled.p`
     line-height: 20px;
     color: var(--secondary-color);
     margin-bottom: 7px;
+    cursor: pointer;
     @media ${device.desktop} {
         font-size: 19px;
         line-height: 23px;
@@ -153,6 +155,7 @@ export const PostLinkImage = styled.img`
     width: 95px;
     height: 115px;
     border-radius: 0px 12px 13px 0px;
+    object-fit: cover;
     @media ${device.desktop} {
         width: 155px;
         height: 155px;

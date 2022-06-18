@@ -2,29 +2,38 @@ import React from "react";
 import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import { TrendingContext } from "../../providers/TrendingProvider";
+import { UserPageContext } from "../../providers/UserPageProvider";
 
 import Header from "../../components/Header";
 import Post from "../../components/Post";
 import Trending from "../../components/Trending";
+import UserPublish from "../../components/UserPublish";
 
 import * as S from "./styles";
 
-const Hashtag = () => {
-    const { hashtagPosts, getHashtagPosts } = useContext(TrendingContext);
-    const { hashtag } = useParams();
+const UserPage = () => {
+    const { userPosts, getUserPosts } = useContext(UserPageContext);
+    const { id } = useParams();
+
     useEffect(() => {
-        getHashtagPosts(hashtag);
-    }, [hashtag]);
+        getUserPosts(id);
+    }, [id]);
 
     return (
         <>
             <Header />
             <S.Main>
+                <S.TimelineContainer>{"timeline"}</S.TimelineContainer>
+                <S.UserPublishContainer>
+                    <UserPublish />
+                </S.UserPublishContainer>
                 <S.ContentContainer>
                     <S.PostsContainer>
-                        <S.HashtagName># {hashtag}</S.HashtagName>
-                        {hashtagPosts.map(
+                        <S.UserData>
+                            <S.UserImage src={userPosts.userpic} />
+                            {`${userPosts.username}'s Posts`}
+                        </S.UserData>
+                        {userPosts.posts?.map(
                             ({
                                 id,
                                 username,
@@ -55,4 +64,4 @@ const Hashtag = () => {
     );
 };
 
-export default Hashtag;
+export default UserPage;

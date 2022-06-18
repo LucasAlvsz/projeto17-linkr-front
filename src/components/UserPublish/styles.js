@@ -47,13 +47,14 @@ export const Container = styled.div`
     background-color: var(--secondary-color);
     width: 100%;
     height: 160px;
+    border-radius: 16px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     padding: 2px;
     @media ${device.mobile} {
         width: 611px;
         height: 209px;
         padding: 1px;
-        border-radius: 16px;
+        border-radius: 0px;
     }
 `;
 export const Button = styled.div`
