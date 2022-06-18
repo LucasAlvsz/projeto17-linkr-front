@@ -17,8 +17,6 @@ export default createGlobalStyle`
 
     html, body, #root {
         background-color:#333333;
-        height: 100vh;
-        width: 100vw;
     }
     :root {
         --primary-color: #171717;

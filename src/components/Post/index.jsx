@@ -1,34 +1,48 @@
+import { useNavigate } from "react-router-dom";
+import ReactHashtag from "react-hashtag";
+
 import * as S from "./styles";
 
-const Post = () => {
+const Post = ({ username, userpic, article, link, urlMetadata }) => {
+    const navigate = useNavigate();
+    // garbiel vai usar depois
+    // window.scrollTo({
+    //     top: 0,
+    //     behavior: "smooth",
+    // });
     return (
         <S.PostContainer>
             <S.PostSideContainer>
-                <S.PostImage src="https://i.pinimg.com/originals/5a/39/3d/5a393d60dab143a9521500b29d5edad6.jpg" />
+                <S.PostUserImage src={userpic} />
             </S.PostSideContainer>
             <S.PostContentContainer>
-                <S.PostUserName>Akali</S.PostUserName>
+                <S.PostUserName>{username}</S.PostUserName>
                 <S.PostText>
-                    Muito maneiro esse tutorial de Material UI com React, deem
-                    uma olhada! #react #material
+                    <ReactHashtag
+                        onHashtagClick={(hashtagValue) =>
+                            navigate(
+                                `/hashtag/${hashtagValue
+                                    .replace("#", "")
+                                    .toLowerCase()}`,
+                            )
+                        }
+                    >
+                        {article}
+                    </ReactHashtag>
                 </S.PostText>
-                <S.PostLinkPreviewContainer>
+                <S.PostLinkPreviewContainer href={link} target="_blank">
                     <S.PostLinkContent>
                         <span>
                             <S.PostLinkTitle>
-                                Como aplicar o Material UI em um projeto React
+                                {urlMetadata.title}
                             </S.PostLinkTitle>
                             <S.PostLinkDescription>
-                                Hey! I have moved this tutorial to my personal
-                                blog. Same content, new location. Sorry about
-                                making you click through to another page.
+                                {urlMetadata.description}
                             </S.PostLinkDescription>
                         </span>
-                        <S.PostLinkUrl href="https://medium.com/@pshrmn/a-simple-react-router">
-                            https://medium.com/@pshrmn/a-simple-react-router
-                        </S.PostLinkUrl>
+                        <S.PostLinkUrl>{link}</S.PostLinkUrl>
                     </S.PostLinkContent>
-                    <S.PostLinkImage src="https://i.pinimg.com/originals/5a/39/3d/5a393d60dab143a9521500b29d5edad6.jpg" />
+                    <S.PostLinkImage src={urlMetadata.image} />
                 </S.PostLinkPreviewContainer>
             </S.PostContentContainer>
         </S.PostContainer>
