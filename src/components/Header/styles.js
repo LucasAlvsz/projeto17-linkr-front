@@ -58,3 +58,8 @@ export const UserIcon = styled.img`
         height: 53px;
     }
 `;
+
+export const HeaderContainer = styled.div`
+    display: flex;
+    justify-content: center;
+`;
