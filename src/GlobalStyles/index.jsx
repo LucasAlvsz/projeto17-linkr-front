@@ -5,10 +5,13 @@ export default createGlobalStyle`
     ${reset}
     * {
         box-sizing: border-box;
+
         text-decoration: none;
+
         outline: 0;
-        margin: 0;
         padding: 0;
+        border: 0;
+        margin: 0;
     }
     
     button {
