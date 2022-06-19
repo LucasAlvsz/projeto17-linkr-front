@@ -20,6 +20,8 @@ const UserPublish = ({ imageUser, setReload }) => {
         };
         // missing send Token
         publishSubmit(data);
+        setReload(!boolean);
+        setboolean(!boolean);
         // eslint-disable-next-line no-undef
         if (!response) {
             setInputs({ url: "", article: "" });
@@ -31,9 +33,9 @@ const UserPublish = ({ imageUser, setReload }) => {
             <S.Container>
                 <S.Data>
                     <S.ImageUser>
-                        <img src={imageUser} alt="carequinha" />
+                        <img src={imageUser} alt="img" />
                     </S.ImageUser>
-                    <S.Form onSubmit={formSubmit}>
+                    <S.Form onSubmit={formSubmit} className="Desk">
                         <p>What are you going to share today?</p>
                         <S.Inputs>
                             <input
@@ -66,10 +68,6 @@ const UserPublish = ({ imageUser, setReload }) => {
                         </S.Inputs>
                         <S.Button>
                             <button
-                                onClick={() => {
-                                    setReload(!boolean);
-                                    setboolean(!boolean);
-                                }}
                                 type="submit"
                                 disabled={disabled}
                                 className="PublishButton"
