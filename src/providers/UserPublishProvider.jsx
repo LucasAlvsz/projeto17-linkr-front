@@ -22,7 +22,7 @@ export const UserPublishProvider = ({ children }) => {
         });
         promise.catch((e) => {
             setResponse(true);
-            alert("Houve um erro ao publicar seu link");
+            alert("There was an error posting your link");
             console.log(e.data);
             return true;
         });
