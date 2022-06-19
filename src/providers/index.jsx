@@ -3,13 +3,16 @@ import { UserPublishProvider } from "./UserPublishProvider";
 
 import { TrendingProvider } from "./TrendingProvider";
 import { UserPageProvider } from "./UserPageProvider";
+import { TimelineProvider } from "./timelineProvider";
 
 export default function AppProvider({ children }) {
     return (
-        <UserPublishProvider>
-            <TrendingProvider>
-                <UserPageProvider>{children}</UserPageProvider>
-            </TrendingProvider>
-        </UserPublishProvider>
+        <TimelineProvider>
+            <UserPublishProvider>
+                <TrendingProvider>
+                    <UserPageProvider>{children}</UserPageProvider>
+                </TrendingProvider>
+            </UserPublishProvider>
+        </TimelineProvider>
     );
 }
