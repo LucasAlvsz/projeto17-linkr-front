@@ -63,7 +63,6 @@ export const Button = styled.div`
     width: 100%;
     height: 20%;
     cursor: pointer;
-
     .PublishButton {
         width: 112px;
         height: 22px;
@@ -97,15 +96,14 @@ export const Data = styled.div`
         @media ${device.desktop} {
             text-align: start;
             margin-top: 0;
-
             font-size: 20px;
         }
     }
     input {
         background: #efefef;
         border-radius: 5px;
-        border: none;
         width: 100%;
+        padding: 15px;
         ::placeholder {
             color: #949494;
         }

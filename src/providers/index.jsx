@@ -6,7 +6,6 @@ import { TrendingProvider } from "./TrendingProvider";
 import { UserPageProvider } from "./UserPageProvider";
 import { TimelineProvider } from "./TimelineProvider";
 import { LoadingProvider } from "./LoadingProvider";
-import { AuthProvider } from "./AuthProvider";
 
 export default function AppProvider({ children }) {
     return (

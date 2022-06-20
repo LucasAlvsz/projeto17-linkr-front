@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import { createContext, useState } from "react";
+import { createContext, useState, useContext } from "react";
 import axios from "axios";
 
 import authorizationHeader from "../utils/authorizationHeader";
@@ -28,8 +28,33 @@ export const UserPublishProvider = ({ children }) => {
             return true;
         });
     };
+
+    const deletePost = async (postId) => {
+        try {
+            await axios.delete(
+                `${process.env.REACT_APP_URI}/post/${postId}`,
+                authHeader,
+            );
+        } catch {
+            console.log("Error");
+        }
+    };
+
+    const editPost = async (postId, data) => {
+        try {
+            await axios.put(
+                `${process.env.REACT_APP_URI}/post/${postId}`,
+                data,
+                authHeader,
+            );
+        } catch {
+            console.log("Error");
+        }
+    };
     return (
-        <PublishContext.Provider value={{ publishSubmit, response }}>
+        <PublishContext.Provider
+            value={{ publishSubmit, response, deletePost, editPost }}
+        >
             {children}
         </PublishContext.Provider>
     );

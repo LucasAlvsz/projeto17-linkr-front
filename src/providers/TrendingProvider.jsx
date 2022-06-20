@@ -1,31 +1,29 @@
+/* eslint-disable no-console */
+/* eslint-disable no-undef */
 
 import axios from "axios";
-import { createContext, useContext, useState, useEffect } from "react";
-import { LoadingContext } from "./LoadingProvider";
+import { createContext, useState } from "react";
 
 import authorizationHeader from "../utils/authorizationHeader";
-import isLogged from "../utils/isLogged";
 import getUserData from "../utils/getUserData";
 
 export const TrendingContext = createContext();
 
 export const TrendingProvider = ({ children }) => {
-    const { update } = useContext(LoadingContext);
     const [trending, setTrending] = useState([]);
     const [hashtagPosts, setHashtagPosts] = useState([]);
     const authHeader = authorizationHeader(getUserData()?.token);
-    if (isLogged()) {
-        useEffect(() => {
-            axios
-                .get(`${process.env.REACT_APP_URI}/trending`, authHeader)
-                .then(({ data }) => {
-                    setTrending(data);
-                })
-                .catch(({ response }) => {
-                    console.log(response);
-                });
-        }, [update]);
-    }
+
+    const getTrending = () => {
+        axios
+            .get(`${process.env.REACT_APP_URI}/trending`, authHeader)
+            .then(({ data }) => {
+                setTrending(data);
+            })
+            .catch(({ response }) => {
+                console.log(response);
+            });
+    };
 
     const getHashtagPosts = (hashtag) => {
         axios
@@ -40,7 +38,12 @@ export const TrendingProvider = ({ children }) => {
 
     return (
         <TrendingContext.Provider
-            value={{ trending, getHashtagPosts, hashtagPosts }}
+            value={{
+                trending,
+                getTrending,
+                getHashtagPosts,
+                hashtagPosts,
+            }}
         >
             {children}
         </TrendingContext.Provider>
