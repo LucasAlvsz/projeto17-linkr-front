@@ -4,7 +4,7 @@ import { PublishContext } from "../../providers/UserPublishProvider";
 
 import * as S from "./style";
 
-export const ScreenDelete = ({ setDeletePost, postId }) => {
+export const ScreenDelete = ({ setDeletePost, postId, update }) => {
     const { deletePost } = useContext(PublishContext);
     return (
         <S.Container>
@@ -13,17 +13,13 @@ export const ScreenDelete = ({ setDeletePost, postId }) => {
                     <h1>Are you sure you want to delete this post?</h1>
                 </S.Text>
                 <S.Buttons>
-                    <button
-                        className=""
-                        onClick={(deletePost) => setDeletePost(!deletePost)}
-                    >
-                        No, go back
-                    </button>
+                    <button onClick={setDeletePost}>No, go back</button>
                     <button
                         className="blue"
                         onClick={() => {
                             deletePost(postId);
-                            setDeletePost(!deletePost);
+                            setDeletePost();
+                            update();
                         }}
                     >
                         Yes, delete it

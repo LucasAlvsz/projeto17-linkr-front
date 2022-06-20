@@ -65,7 +65,7 @@ export const PostContentContainer = styled.div`
 `;
 
 export const PostUserName = styled.div`
-    width: 80%;
+    width: max-content;
     display: flex;
     justify-content: space-between;
     font-family: var(--primary-font);
