@@ -23,8 +23,7 @@ const Form = () => {
         axios
             .post(url, signUpData)
             .then(() => navigate("/timeline"))
-            .catch(({ response }) => {
-                console.log(response);
+            .catch(() => {
                 handleError;
             });
     };

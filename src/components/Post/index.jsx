@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import ReactHashtag from "react-hashtag";
 import { FaTrash } from "react-icons/fa";
 import { TiPencil } from "react-icons/ti";
+import ReactTooltip from "react-tooltip";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import getUserData from "../../utils/getUserData";
 
@@ -25,13 +26,15 @@ const Post = ({
     usersLikes,
 }) => {
     const navigate = useNavigate();
-    const { likeMessage } = useContext(LikeContext);
+    const userLikesLength = usersLikes.length;
+    const { likeMessage, buildTooltipMessage } = useContext(LikeContext);
     const { editPost } = useContext(PublishContext);
     const [deletePost, setDeletePost] = useState(false);
     const [editPostState, setEditPostState] = useState(false);
     const [articleLog, setArticleLog] = useState(article);
     const userIdStorage = getUserData().userId;
     const userLiked = usersLikes.find((like) => like.userId === userIdStorage);
+    const tooltipMessage = buildTooltipMessage(usersLikes);
     return (
         <S.PostContainer>
             {deletePost && (
@@ -60,7 +63,19 @@ const Post = ({
                         }}
                     />
                 )}
-                <p>{`${likes} likes`}</p>
+
+                {userLikesLength ? (
+                    <>
+                        <p data-tip={`${tooltipMessage}`}>{`${likes} likes`}</p>
+                        <ReactTooltip
+                            place="bottom"
+                            type="light"
+                            effect="solid"
+                        />
+                    </>
+                ) : (
+                    <p>{`${likes} likes`}</p>
+                )}
             </S.PostSideContainer>
             <S.PostContentContainer>
                 <S.PostUserName onClick={() => navigate(`/user/${userid}`)}>

@@ -25,10 +25,44 @@ export const LikeProvider = ({ children }) => {
     const filterLikesPost = (postId) => {
         return userLikes.filter((like) => like.postId === postId);
     };
+    const buildTooltipMessage = (usersLikes) => {
+        const userIdStorage = getUserData().userId;
+        const userLiked = usersLikes.find(
+            (like) => like.userId === userIdStorage,
+        );
+        if (userLiked) {
+            const length = usersLikes.length;
+            const theTwoFirst = usersLikes.filter(
+                (people) => people.userId !== userIdStorage,
+            );
+            const message =
+                length === 1
+                    ? "Você"
+                    : `Você, ${theTwoFirst[0]?.username} e outras ${
+                        length - 2
+                    } pessoas`;
+            return message;
+        } else {
+            const length = usersLikes.length;
+            const theTwoFirst = usersLikes.slice(0, 2);
+            const message =
+                length === 1
+                    ? `${theTwoFirst[0]?.username}`
+                    : `${theTwoFirst[0]?.username}, ${
+                        theTwoFirst[1]?.username
+                    } e outras ${length - 1} pessoas`;
+            return message;
+        }
+    };
 
     return (
         <LikeContext.Provider
-            value={{ likeMessage, getLikes, filterLikesPost }}
+            value={{
+                likeMessage,
+                getLikes,
+                filterLikesPost,
+                buildTooltipMessage,
+            }}
         >
             {children}
         </LikeContext.Provider>
