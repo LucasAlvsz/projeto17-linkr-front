@@ -19,6 +19,7 @@ const Post = ({
     userid,
     article,
     link,
+    likes,
     urlMetadata,
 }) => {
     const navigate = useNavigate();
@@ -42,7 +43,7 @@ const Post = ({
                     onClick={() => navigate(`/user/${userid}`)}
                 />
                 <AiOutlineHeart onClick={() => likeMessage(postId)} />
-                <p>12 likes</p>
+                <p>{`${likes} likes`}</p>
             </S.PostSideContainer>
             <S.PostContentContainer>
                 <S.PostUserName onClick={() => navigate(`/user/${userid}`)}>

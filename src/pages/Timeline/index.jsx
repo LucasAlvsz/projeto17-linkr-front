@@ -36,6 +36,7 @@ const Timeline = () => {
                                 id,
                                 username,
                                 userpic,
+                                likes,
                                 userId,
                                 article,
                                 link,
@@ -48,6 +49,7 @@ const Timeline = () => {
                                     userpic={userpic}
                                     userid={userId}
                                     article={article}
+                                    likes={likes}
                                     link={link}
                                     urlMetadata={urlMetadata}
                                 />

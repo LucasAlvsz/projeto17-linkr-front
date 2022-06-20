@@ -40,6 +40,7 @@ const UserPage = () => {
                                 id,
                                 username,
                                 userpic,
+                                likes,
                                 userId,
                                 article,
                                 link,
@@ -53,6 +54,7 @@ const UserPage = () => {
                                     userid={userId}
                                     article={article}
                                     link={link}
+                                    likes={likes}
                                     urlMetadata={urlMetadata}
                                 />
                             ),
