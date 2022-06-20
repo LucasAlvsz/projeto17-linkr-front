@@ -1,12 +1,32 @@
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { AuthContext } from "../../../../../providers/AuthProvider";
+//import handleError from "../../../../../utils/handleError";
+
 import * as S from "./../../../styles";
 
 import Inputs from "./Inputs";
 import SubmitButton from "./SubmitButton";
 
 const Form = () => {
+    const navigate = useNavigate();
+    const { signIn } = useContext(AuthContext);
+    const [signInData, setSignInData] = useState({
+        email: "",
+        password: "",
+    });
+    const handleSignIn = async (e) => {
+        e.preventDefault();
+        signIn(signInData.email, signInData.password);
+        setTimeout(() => {
+            navigate("/timeline");
+        }, 500);
+    };
+
     return (
-        <S.Form>
-            <Inputs />
+        <S.Form onSubmit={handleSignIn}>
+            <Inputs {...{ signInData, setSignInData }} />
             <SubmitButton />
         </S.Form>
     );

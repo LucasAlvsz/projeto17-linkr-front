@@ -4,15 +4,19 @@
 import { createContext, useState } from "react";
 import axios from "axios";
 
+import authorizationHeader from "../utils/authorizationHeader";
+import getUserData from "../utils/getUserData";
+
 export const UserPageContext = createContext();
 
 export const UserPageProvider = ({ children }) => {
     const [usersSearchBar, setUsersSearchBar] = useState([]);
     const [userPosts, setUserPosts] = useState({});
+    const authHeader = authorizationHeader(getUserData()?.token);
 
     const getUserPosts = (userId) => {
         axios
-            .get(`${process.env.REACT_APP_URI}/user/${userId}`)
+            .get(`${process.env.REACT_APP_URI}/user/${userId}`, authHeader)
             .then(({ data }) => {
                 setUserPosts(data);
             })
@@ -25,6 +29,7 @@ export const UserPageProvider = ({ children }) => {
         try {
             const users = await axios.get(
                 `${process.env.REACT_APP_URI}/user/?search=${search}`,
+                authHeader,
             );
             setUsersSearchBar(users.data);
         } catch {

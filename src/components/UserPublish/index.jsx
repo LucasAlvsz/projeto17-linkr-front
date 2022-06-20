@@ -1,9 +1,22 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { PublishContext } from "../../providers/UserPublishProvider";
+import { LoadingContext } from "../../providers/LoadingProvider";
+import isLogged from "../../utils/isLogged";
+import getUserData from "../../utils/getUserData";
 
 import * as S from "./styles";
-const UserPublish = ({ imageUser, setReload }) => {
+
+const UserPublish = () => {
+    const navigate = useNavigate();
+    const [pictureUrl, setPictureUrl] = useState("");
+    useEffect(() => {
+        if (!isLogged()) navigate("/sign-in");
+        else setPictureUrl(getUserData().pictureUrl);
+    }, []);
     const { publishSubmit, response } = useContext(PublishContext);
+    const { update, setUpdate } = useContext(LoadingContext);
     const [disabled, setDisabled] = useState(false);
     const [boolean, setboolean] = useState(false);
 
@@ -20,7 +33,7 @@ const UserPublish = ({ imageUser, setReload }) => {
         };
         // missing send Token
         publishSubmit(data);
-        setReload(!boolean);
+        setUpdate(!update);
         setboolean(!boolean);
         // eslint-disable-next-line no-undef
         if (!response) {
@@ -33,7 +46,7 @@ const UserPublish = ({ imageUser, setReload }) => {
             <S.Container>
                 <S.Data>
                     <S.ImageUser>
-                        <img src={imageUser} alt="img" />
+                        <img src={pictureUrl} alt="img" />
                     </S.ImageUser>
                     <S.Form onSubmit={formSubmit} className="Desk">
                         <p>What are you going to share today?</p>

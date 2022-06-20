@@ -1,8 +1,8 @@
-import React from "react";
 import { useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import { TrendingContext } from "../../providers/TrendingProvider";
+import isLogged from "../../utils/isLogged";
 
 import Header from "../../components/Header";
 import Post from "../../components/Post";
@@ -11,10 +11,12 @@ import Trending from "../../components/Trending";
 import * as S from "./styles";
 
 const Hashtag = () => {
+    const navigate = useNavigate();
     const { hashtagPosts, getHashtagPosts } = useContext(TrendingContext);
     const { hashtag } = useParams();
     useEffect(() => {
-        getHashtagPosts(hashtag);
+        if (!isLogged()) navigate("/sign-in");
+        else getHashtagPosts(hashtag);
     }, [hashtag]);
 
     return (

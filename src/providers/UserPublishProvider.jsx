@@ -3,20 +3,21 @@
 /* eslint-disable no-undef */
 import { createContext, useState } from "react";
 import axios from "axios";
+
+import authorizationHeader from "../utils/authorizationHeader";
+import getUserData from "../utils/getUserData";
+
 export const PublishContext = createContext();
 
 export const UserPublishProvider = ({ children }) => {
     const [response, setResponse] = useState(false);
+    const authHeader = authorizationHeader(getUserData()?.token);
     const publishSubmit = (data) => {
-        // missing token
-        // localStorage.getItem
-        const token = localStorage.getItem("token");
-        const config = {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        };
-        const promise = axios.post(`${process.env.REACT_APP_URI}/post`, data);
+        const promise = axios.post(
+            `${process.env.REACT_APP_URI}/post`,
+            data,
+            authHeader,
+        );
         promise.then((response) => {
             console.log(response.data);
         });
