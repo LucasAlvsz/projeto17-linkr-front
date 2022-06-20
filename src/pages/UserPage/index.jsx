@@ -10,16 +10,23 @@ import Trending from "../../components/Trending";
 import UserPublish from "../../components/UserPublish";
 
 import * as S from "./styles";
+import { LoadingContext } from "../../providers/LoadingProvider";
+import { LikeContext } from "../../providers/LikeProvider";
 
 const UserPage = () => {
     const navigate = useNavigate();
     const { userPosts, getUserPosts } = useContext(UserPageContext);
+    const { getLikes, filterLikesPost } = useContext(LikeContext);
+    const { update, setUpdate } = useContext(LoadingContext);
     const { id } = useParams();
 
     useEffect(() => {
         if (!isLogged()) navigate("/sign-in");
-        else getUserPosts(id);
-    }, [id]);
+        else {
+            getUserPosts(id);
+            getLikes();
+        }
+    }, [id, update]);
 
     return (
         <>
@@ -53,9 +60,11 @@ const UserPage = () => {
                                     userpic={userpic}
                                     userid={userId}
                                     article={article}
+                                    usersLikes={filterLikesPost(id)}
                                     link={link}
                                     likes={likes}
                                     urlMetadata={urlMetadata}
+                                    update={() => setUpdate(!update)}
                                 />
                             ),
                         )}

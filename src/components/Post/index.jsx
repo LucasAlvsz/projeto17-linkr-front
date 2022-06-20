@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import ReactHashtag from "react-hashtag";
 import { FaTrash } from "react-icons/fa";
 import { TiPencil } from "react-icons/ti";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import getUserData from "../../utils/getUserData";
 
 import { PublishContext } from "../../providers/UserPublishProvider";
@@ -21,6 +21,8 @@ const Post = ({
     link,
     likes,
     urlMetadata,
+    update,
+    usersLikes,
 }) => {
     const navigate = useNavigate();
     const { likeMessage } = useContext(LikeContext);
@@ -29,6 +31,7 @@ const Post = ({
     const [editPostState, setEditPostState] = useState(false);
     const [articleLog, setArticleLog] = useState(article);
     const userIdStorage = getUserData().userId;
+    const userLiked = usersLikes.find((like) => like.userId === userIdStorage);
     return (
         <S.PostContainer>
             {deletePost && (
@@ -42,7 +45,21 @@ const Post = ({
                     src={userpic}
                     onClick={() => navigate(`/user/${userid}`)}
                 />
-                <AiOutlineHeart onClick={() => likeMessage(postId)} />
+                {userLiked ? (
+                    <AiFillHeart
+                        onClick={() => {
+                            likeMessage(postId);
+                            update();
+                        }}
+                    />
+                ) : (
+                    <AiOutlineHeart
+                        onClick={() => {
+                            likeMessage(postId);
+                            update();
+                        }}
+                    />
+                )}
                 <p>{`${likes} likes`}</p>
             </S.PostSideContainer>
             <S.PostContentContainer>
