@@ -1,33 +1,29 @@
-import { useContext } from "react";
-
-import { AuthContext } from "../../../../../../providers/AuthProvider";
-
-const Inputs = () => {
-    const { signInData, setSignInData } = useContext(AuthContext);
+const Inputs = ({ signInData, setSignInData }) => {
 
     const { email, password } = signInData;
 
     const handleData = (e) => {
         const { name, value } = e.target;
-
-        const newData = {...signInData};
+        const newData = { ...signInData };
         newData[name] = value;
         setSignInData(newData);
     };
-
     return (
         <>
-            <input 
+            <input
                 placeholder="e-mail"
-                value={email}
+                type="email"
                 name="email"
+                value={email}
+                required
                 onChange={handleData}
             />
-            <input 
+            <input
                 placeholder="password"
                 type="password"
-                value={password}
                 name="password"
+                value={password}
+                required
                 onChange={handleData}
             />
         </>

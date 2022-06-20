@@ -21,9 +21,11 @@ export const Logo = styled.h1`
     line-height: 50px;
     letter-spacing: 0.05em;
     color: var(--secondary-color);
-    @media ${device.mobile} {
+    cursor: pointer;
+    @media ${device.desktop} {
         font-size: 49px;
         line-height: 54px;
+        margin-right: 10px;
     }
 `;
 
@@ -41,11 +43,12 @@ export const UserOptionsContainer = styled.div`
         color: var(--secondary-color);
         cursor: pointer;
     }
-    @media ${device.mobile} {
+    @media ${device.desktop} {
         .options-icon {
             font-size: 18.5px;
         }
         margin-right: 17px;
+        margin-left: 10px;
     }
 `;
 
@@ -53,7 +56,8 @@ export const UserIcon = styled.img`
     width: 44px;
     height: 44px;
     border-radius: 26.5px;
-    @media ${device.mobile} {
+    object-fit: cover;
+    @media ${device.desktop} {
         width: 53px;
         height: 53px;
     }

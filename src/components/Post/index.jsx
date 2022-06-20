@@ -10,7 +10,6 @@ const Post = ({ username, userpic, userid, article, link, urlMetadata }) => {
     //     top: 0,
     //     behavior: "smooth",
     // });
-    console.log(urlMetadata);
     return (
         <S.PostContainer>
             <S.PostSideContainer>
@@ -40,15 +39,15 @@ const Post = ({ username, userpic, userid, article, link, urlMetadata }) => {
                     <S.PostLinkContent>
                         <span>
                             <S.PostLinkTitle>
-                                {urlMetadata?.title || ""}
+                                {urlMetadata.title}
                             </S.PostLinkTitle>
                             <S.PostLinkDescription>
-                                {urlMetadata?.description}
+                                {urlMetadata.description}
                             </S.PostLinkDescription>
                         </span>
                         <S.PostLinkUrl>{link}</S.PostLinkUrl>
                     </S.PostLinkContent>
-                    <S.PostLinkImage src={urlMetadata?.image} />
+                    <S.PostLinkImage src={urlMetadata.image} />
                 </S.PostLinkPreviewContainer>
             </S.PostContentContainer>
         </S.PostContainer>

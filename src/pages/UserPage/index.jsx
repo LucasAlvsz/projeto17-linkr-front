@@ -1,8 +1,8 @@
-import React from "react";
 import { useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import { UserPageContext } from "../../providers/UserPageProvider";
+import isLogged from "../../utils/isLogged";
 
 import Header from "../../components/Header";
 import Post from "../../components/Post";
@@ -12,11 +12,13 @@ import UserPublish from "../../components/UserPublish";
 import * as S from "./styles";
 
 const UserPage = () => {
+    const navigate = useNavigate();
     const { userPosts, getUserPosts } = useContext(UserPageContext);
     const { id } = useParams();
 
     useEffect(() => {
-        getUserPosts(id);
+        if (!isLogged()) navigate("/sign-in");
+        else getUserPosts(id);
     }, [id]);
 
     return (
