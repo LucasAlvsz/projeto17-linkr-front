@@ -2,7 +2,9 @@ import styled from "styled-components";
 import device from "../../utils/devicesSizes";
 export const Container = styled.div`
     z-index: 1;
-    position: absolute;
+    position: fixed;
+    top: 0;
+    left: 0;
     display: flex;
     justify-content: center;
     align-items: center;

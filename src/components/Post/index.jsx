@@ -41,6 +41,7 @@ const Post = ({
                 <ScreenDelete
                     setDeletePost={(deletePost) => setDeletePost(!deletePost)}
                     postId={postId}
+                    update={update}
                 />
             )}
             <S.PostSideContainer>
@@ -78,8 +79,10 @@ const Post = ({
                 )}
             </S.PostSideContainer>
             <S.PostContentContainer>
-                <S.PostUserName onClick={() => navigate(`/user/${userid}`)}>
-                    {username}
+                <S.PostUserName>
+                    <p onClick={() => navigate(`/user/${userid}`)}>
+                        {username}
+                    </p>
                     <S.IconsContainer
                         userId={userid}
                         userIdStorage={userIdStorage}
@@ -103,6 +106,8 @@ const Post = ({
                                 article: articleLog,
                                 url: link,
                             });
+                            setEditPostState(!editPostState);
+                            update();
                         }}
                     >
                         <S.PostInput
