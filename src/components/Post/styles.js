@@ -86,6 +86,18 @@ export const PostText = styled.p`
     }
 `;
 
+export const PostInput = styled.input`
+    width: 100%;
+    height: auto;
+    min-height: 30px;
+    border-radius: 7px;
+    padding: 0 6px;
+`;
+
+export const PostForm = styled.form`
+    width: 100%;
+`;
+
 export const PostLinkPreviewContainer = styled.a`
     width: 100%;
     height: 115px;

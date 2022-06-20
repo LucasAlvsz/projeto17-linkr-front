@@ -43,6 +43,7 @@ const Timeline = () => {
                             }) => (
                                 <Post
                                     key={id}
+                                    postId={id}
                                     username={username}
                                     userpic={userpic}
                                     userid={userId}

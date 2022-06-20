@@ -46,9 +46,10 @@ export const UserPublishProvider = ({ children }) => {
                 `${process.env.REACT_APP_URI}/post/${postId}`,
                 data,
                 authHeader,
+                console.log(data),
             );
-        } catch {
-            console.log("Error");
+        } catch ({ response }) {
+            console.log(response);
         }
     };
     return (
