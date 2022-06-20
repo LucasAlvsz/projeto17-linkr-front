@@ -52,6 +52,8 @@ export const PostContentContainer = styled.div`
 `;
 
 export const PostUserName = styled.p`
+    display: flex;
+    justify-content: space-between;
     font-family: var(--primary-font);
     font-weight: 400;
     font-size: 17px;
@@ -59,6 +61,14 @@ export const PostUserName = styled.p`
     color: var(--secondary-color);
     margin-bottom: 7px;
     cursor: pointer;
+
+    .icon-post {
+        font-size: 14px;
+
+        :first-child {
+            margin-right: 12px;
+        }
+    }
     @media ${device.desktop} {
         font-size: 19px;
         line-height: 23px;

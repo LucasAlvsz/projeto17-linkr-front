@@ -1,5 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import ReactHashtag from "react-hashtag";
+import { FaTrash } from "react-icons/fa";
+import { TiPencil } from "react-icons/ti";
+import getUserData from "../../utils/getUserData";
 
 import * as S from "./styles";
 
@@ -10,6 +13,8 @@ const Post = ({ username, userpic, userid, article, link, urlMetadata }) => {
     //     top: 0,
     //     behavior: "smooth",
     // });
+    const userId = getUserData().userId;
+
     return (
         <S.PostContainer>
             <S.PostSideContainer>
@@ -21,7 +26,12 @@ const Post = ({ username, userpic, userid, article, link, urlMetadata }) => {
             <S.PostContentContainer>
                 <S.PostUserName onClick={() => navigate(`/user/${userid}`)}>
                     {username}
+                    <div>
+                        <TiPencil userId={userId} className="icon-post" />
+                        <FaTrash userId={userId} className="icon-post" />
+                    </div>
                 </S.PostUserName>
+
                 <S.PostText>
                     <ReactHashtag
                         onHashtagClick={(hashtagValue) =>
