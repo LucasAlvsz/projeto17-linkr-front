@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import styled from "styled-components";
 import device from "../../utils/devicesSizes";
 
@@ -5,6 +6,7 @@ export const PostContainer = styled.div`
     width: 100vw;
     height: 232px;
     display: flex;
+    position: relative;
     align-items: center;
     background-color: var(--primary-color);
     padding: 10px 15px 15px;
@@ -51,7 +53,8 @@ export const PostContentContainer = styled.div`
     }
 `;
 
-export const PostUserName = styled.p`
+export const PostUserName = styled.div`
+    width: 80%;
     display: flex;
     justify-content: space-between;
     font-family: var(--primary-font);
@@ -61,17 +64,24 @@ export const PostUserName = styled.p`
     color: var(--secondary-color);
     margin-bottom: 7px;
     cursor: pointer;
+    @media ${device.desktop} {
+        font-size: 19px;
+        line-height: 23px;
+    }
+`;
 
+export const IconsContainer = styled.div`
+    position: absolute;
+    top: 23px;
+    right: 22px;
+    display: ${({ userId, userIdStorage }) =>
+        userId !== userIdStorage ? "none" : "flex"};
     .icon-post {
         font-size: 14px;
 
         :first-child {
             margin-right: 12px;
         }
-    }
-    @media ${device.desktop} {
-        font-size: 19px;
-        line-height: 23px;
     }
 `;
 
@@ -94,6 +104,18 @@ export const PostText = styled.p`
         font-size: 17px;
         line-height: 20px;
     }
+`;
+
+export const PostInput = styled.input`
+    width: 100%;
+    height: auto;
+    min-height: 30px;
+    border-radius: 7px;
+    padding: 0 6px;
+`;
+
+export const PostForm = styled.form`
+    width: 100%;
 `;
 
 export const PostLinkPreviewContainer = styled.a`
