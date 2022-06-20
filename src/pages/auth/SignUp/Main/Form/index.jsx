@@ -1,9 +1,9 @@
 /* eslint-disable no-undef */
 import axios from "axios";
-import { useContext } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { AuthContext } from "../../../../../providers/AuthProvider";
+//import { AuthContext } from "../../../../../providers/AuthProvider";
 import * as S from "./../../../styles";
 import Inputs from "./Inputs";
 import SubmitButton from "./SubmitButton";
@@ -23,7 +23,10 @@ const Form = () => {
         axios
             .post(url, signUpData)
             .then(() => navigate("/timeline"))
-            .catch(handleError);
+            .catch(({ response }) => {
+                console.log(response);
+                handleError;
+            });
     };
 
     return (

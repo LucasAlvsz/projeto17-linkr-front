@@ -1,13 +1,20 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { TrendingContext } from "../../providers/TrendingProvider";
+import { TimelineContext } from "../../providers/TimelineProvider";
+import isLogged from "../../utils/isLogged";
 
 import * as S from "./styles";
 
 const Trending = () => {
-    const { trending } = useContext(TrendingContext);
+    const { trending, getTrending } = useContext(TrendingContext);
+    const { DataPosts } = useContext(TimelineContext);
     const navigate = useNavigate();
+    useEffect(() => {
+        if (!isLogged()) navigate("/sign-in");
+        else getTrending();
+    }, [DataPosts]);
 
     return (
         <S.TrendingContainer>

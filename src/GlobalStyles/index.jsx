@@ -12,6 +12,8 @@ export default createGlobalStyle`
         padding: 0;
         border: 0;
         margin: 0;
+
+        word-break: break-word;
     }
     
     button {

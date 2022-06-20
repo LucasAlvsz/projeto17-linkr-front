@@ -44,6 +44,7 @@ export const UserPageProvider = ({ children }) => {
                 getUsersSearchBar,
                 userPosts,
                 getUserPosts,
+                deletePost,
             }}
         >
             {children}

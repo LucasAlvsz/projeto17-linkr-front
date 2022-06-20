@@ -21,6 +21,7 @@ export const Logo = styled.h1`
     line-height: 50px;
     letter-spacing: 0.05em;
     color: var(--secondary-color);
+    word-break: keep-all;
     cursor: pointer;
     @media ${device.desktop} {
         font-size: 49px;

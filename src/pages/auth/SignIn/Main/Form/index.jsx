@@ -4,13 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../../../providers/AuthProvider";
 
 import * as S from "./../../../styles";
-
-
-import * as S from "./../../../styles";
 import Inputs from "./Inputs";
 import SubmitButton from "./SubmitButton";
-import handleError from "./../../../../../utils/handleError";
-import { AuthContext } from "../../../../../providers/AuthProvider";
+//import handleError from "./../../../../../utils/handleError";
 
 const Form = () => {
     const navigate = useNavigate();
@@ -24,7 +20,7 @@ const Form = () => {
         signIn(signInData.email, signInData.password);
         setTimeout(() => {
             navigate("/timeline");
-        }, 500);
+        }, 1000);
     };
     return (
         <S.Form onSubmit={handleSignIn}>
