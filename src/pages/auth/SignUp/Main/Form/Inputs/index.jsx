@@ -1,4 +1,10 @@
-const Inputs = ({ signUpData, setSignUpData }) => {
+import { useContext } from "react";
+
+import { AuthContext } from "../../../../../../providers/AuthProvider";
+
+const Inputs = () => {
+    const { signUpData, setSignUpData } = useContext(AuthContext);
+
     const { email, password, username, pictureUrl } = signUpData;
 
     const handleData = (e) => {

@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable no-undef */
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
 
