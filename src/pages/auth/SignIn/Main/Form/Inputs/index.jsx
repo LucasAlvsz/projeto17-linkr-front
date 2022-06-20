@@ -1,4 +1,5 @@
 const Inputs = ({ signInData, setSignInData }) => {
+
     const { email, password } = signInData;
 
     const handleData = (e) => {

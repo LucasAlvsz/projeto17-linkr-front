@@ -4,6 +4,7 @@ import axios from "axios";
 
 import setUserData from "../utils/setUserData";
 
+
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -33,3 +34,4 @@ export const AuthProvider = ({ children }) => {
         </AuthContext.Provider>
     );
 };
+

@@ -2,12 +2,15 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../../../../../providers/AuthProvider";
-//import handleError from "../../../../../utils/handleError";
 
 import * as S from "./../../../styles";
 
+
+import * as S from "./../../../styles";
 import Inputs from "./Inputs";
 import SubmitButton from "./SubmitButton";
+import handleError from "./../../../../../utils/handleError";
+import { AuthContext } from "../../../../../providers/AuthProvider";
 
 const Form = () => {
     const navigate = useNavigate();
@@ -23,7 +26,6 @@ const Form = () => {
             navigate("/timeline");
         }, 500);
     };
-
     return (
         <S.Form onSubmit={handleSignIn}>
             <Inputs {...{ signInData, setSignInData }} />

@@ -1,6 +1,7 @@
 import React from "react";
-import { UserPublishProvider } from "./UserPublishProvider";
 
+import { AuthProvider } from "./AuthProvider";
+import { UserPublishProvider } from "./UserPublishProvider";
 import { TrendingProvider } from "./TrendingProvider";
 import { UserPageProvider } from "./UserPageProvider";
 import { TimelineProvider } from "./TimelineProvider";
