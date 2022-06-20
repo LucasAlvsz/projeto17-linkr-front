@@ -18,9 +18,7 @@ export const UserPublishProvider = ({ children }) => {
             data,
             authHeader,
         );
-        promise.then((response) => {
-            console.log(response.data);
-        });
+        promise.then(() => {});
         promise.catch((e) => {
             setResponse(true);
             alert("There was an error posting your link");
@@ -46,7 +44,6 @@ export const UserPublishProvider = ({ children }) => {
                 `${process.env.REACT_APP_URI}/post/${postId}`,
                 data,
                 authHeader,
-                console.log(data),
             );
         } catch ({ response }) {
             console.log(response);
