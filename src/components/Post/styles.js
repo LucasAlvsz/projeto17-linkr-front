@@ -25,6 +25,17 @@ export const PostSideContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: white;
+    > svg {
+        font-size: 36px;
+        margin: 12px 0;
+    }
+    > p {
+        font-family: "Lato";
+        font-size: 16px;
+        width: 60px;
+        text-align: center;
+    }
 `;
 
 export const PostUserImage = styled.div`

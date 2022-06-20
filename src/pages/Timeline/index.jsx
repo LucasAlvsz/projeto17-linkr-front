@@ -11,14 +11,19 @@ import Trending from "../../components/Trending";
 import UserPublish from "../../components/UserPublish";
 
 import * as S from "./style";
+import { LikeContext } from "../../providers/LikeProvider";
 
 const Timeline = () => {
     const navigate = useNavigate();
     const { DataPosts, catchPosts } = useContext(TimelineContext);
-    const { update } = useContext(LoadingContext);
+    const { getLikes, filterLikesPost } = useContext(LikeContext);
+    const { update, setUpdate } = useContext(LoadingContext);
     useEffect(() => {
         if (!isLogged()) navigate("/sign-in");
-        else catchPosts();
+        else {
+            catchPosts();
+            getLikes();
+        }
     }, [update]);
     return (
         <>
@@ -36,6 +41,7 @@ const Timeline = () => {
                                 id,
                                 username,
                                 userpic,
+                                likes,
                                 userId,
                                 article,
                                 link,
@@ -48,8 +54,11 @@ const Timeline = () => {
                                     userpic={userpic}
                                     userid={userId}
                                     article={article}
+                                    usersLikes={filterLikesPost(id)}
+                                    likes={likes}
                                     link={link}
                                     urlMetadata={urlMetadata}
+                                    update={() => setUpdate(!update)}
                                 />
                             ),
                         )}

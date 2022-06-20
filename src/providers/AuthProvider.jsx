@@ -4,7 +4,6 @@ import axios from "axios";
 
 import setUserData from "../utils/setUserData";
 
-
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -13,9 +12,6 @@ export const AuthProvider = ({ children }) => {
             .post(`${process.env.REACT_APP_URI}/sign-in`, { email, password })
             .then(({ data }) => {
                 setUserData(data);
-            })
-            .catch(({ response }) => {
-                console.log(response);
             });
     };
 
@@ -34,4 +30,3 @@ export const AuthProvider = ({ children }) => {
         </AuthContext.Provider>
     );
 };
-
