@@ -1,4 +1,5 @@
-import styled from "styled-components"; 
+import styled from "styled-components";
+import device from "./../../../../utils/devicesSizes";
 
 export const Container = styled.div`
     height: 175px;
@@ -12,8 +13,12 @@ export const Container = styled.div`
     color: white;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     background-color: var(--color-header);
+    @media ${device.desktop} {
+        height: 100vh;
+        width: 63%;
+    }
 
-    >div{
+    > div {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -21,13 +26,13 @@ export const Container = styled.div`
 
         font-weight: 700;
 
-        >h1 {
-            font-size: 76px; 
+        > h1 {
+            font-size: 76px;
             letter-spacing: 0.05em;
             font-family: Passion One;
         }
-    
-        >h2 {
+
+        > h2 {
             font-size: 23px;
             line-height: 34px;
             text-align: center;
