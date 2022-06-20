@@ -3,12 +3,14 @@ import { useNavigate } from "react-router-dom";
 import ReactHashtag from "react-hashtag";
 import { FaTrash } from "react-icons/fa";
 import { TiPencil } from "react-icons/ti";
+import { AiOutlineHeart } from "react-icons/ai";
 import getUserData from "../../utils/getUserData";
 
 import { PublishContext } from "../../providers/UserPublishProvider";
 import ScreenDelete from "../ScreendDelete";
 
 import * as S from "./styles";
+import { LikeContext } from "../../providers/LikeProvider";
 
 const Post = ({
     postId,
@@ -20,6 +22,7 @@ const Post = ({
     urlMetadata,
 }) => {
     const navigate = useNavigate();
+    const { likeMessage } = useContext(LikeContext);
     const { editPost } = useContext(PublishContext);
     const [deletePost, setDeletePost] = useState(false);
     const [editPostState, setEditPostState] = useState(false);
@@ -38,6 +41,8 @@ const Post = ({
                     src={userpic}
                     onClick={() => navigate(`/user/${userid}`)}
                 />
+                <AiOutlineHeart onClick={() => likeMessage(postId)} />
+                <p>12 likes</p>
             </S.PostSideContainer>
             <S.PostContentContainer>
                 <S.PostUserName onClick={() => navigate(`/user/${userid}`)}>
