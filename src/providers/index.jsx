@@ -8,16 +8,14 @@ import { TimelineProvider } from "./timelineProvider";
 
 export default function AppProvider({ children }) {
     return (
-        <AuthProvider>
         <TimelineProvider>
-
-            <UserPublishProvider>
-                <TrendingProvider>
-                    <UserPageProvider>{children}</UserPageProvider>
-                </TrendingProvider>
-            </UserPublishProvider>
-        </AuthProvider>
+            <AuthProvider>
+                <UserPublishProvider>
+                    <TrendingProvider>
+                        <UserPageProvider>{children}</UserPageProvider>
+                    </TrendingProvider>
+                </UserPublishProvider>
+            </AuthProvider>
         </TimelineProvider>
-
     );
 }
