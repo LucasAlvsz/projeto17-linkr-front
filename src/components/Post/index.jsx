@@ -24,7 +24,7 @@ const Post = ({
     const [deletePost, setDeletePost] = useState(false);
     const [editPostState, setEditPostState] = useState(false);
     const [articleLog, setArticleLog] = useState(article);
-    const userId = getUserData().userId;
+    const userIdStorage = getUserData().userId;
     return (
         <S.PostContainer>
             {deletePost && (
@@ -42,10 +42,19 @@ const Post = ({
             <S.PostContentContainer>
                 <S.PostUserName onClick={() => navigate(`/user/${userid}`)}>
                     {username}
-                    <div>
-                        <TiPencil userId={userId} className="icon-post" />
-                        <FaTrash userId={userId} className="icon-post" />
-                    </div>
+                    <S.IconsContainer
+                        userId={userid}
+                        userIdStorage={userIdStorage}
+                    >
+                        <TiPencil
+                            onClick={() => setEditPostState(!editPostState)}
+                            className="icon-post"
+                        />
+                        <FaTrash
+                            onClick={() => setDeletePost(!deletePost)}
+                            className="icon-post"
+                        />
+                    </S.IconsContainer>
                 </S.PostUserName>
                 {editPostState ? (
                     <S.PostForm
