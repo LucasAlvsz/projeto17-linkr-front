@@ -1,6 +1,9 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactHashtag from "react-hashtag";
+import { FaTrash } from "react-icons/fa";
+import { TiPencil } from "react-icons/ti";
+import getUserData from "../../utils/getUserData";
 
 import { PublishContext } from "../../providers/UserPublishProvider";
 import ScreenDelete from "../ScreendDelete";
@@ -21,6 +24,7 @@ const Post = ({
     const [deletePost, setDeletePost] = useState(false);
     const [editPostState, setEditPostState] = useState(false);
     const [articleLog, setArticleLog] = useState(article);
+    const userId = getUserData().userId;
     return (
         <S.PostContainer>
             {deletePost && (
@@ -38,6 +42,10 @@ const Post = ({
             <S.PostContentContainer>
                 <S.PostUserName onClick={() => navigate(`/user/${userid}`)}>
                     {username}
+                    <div>
+                        <TiPencil userId={userId} className="icon-post" />
+                        <FaTrash userId={userId} className="icon-post" />
+                    </div>
                 </S.PostUserName>
                 {editPostState ? (
                     <S.PostForm
