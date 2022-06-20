@@ -2,6 +2,7 @@ import styled from "styled-components";
 import device from "../../utils/devicesSizes";
 export const Container = styled.div`
     z-index: 1;
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,11 +49,16 @@ export const Buttons = styled.div`
     align-items: center;
     button {
         background-color: var(--color-input);
-        width: 134px;
-        height: 37px;
+        width: 110px;
+        height: 28px;
         border-radius: 5px;
         color: var(--color-button);
         font-weight: bold;
+        @media ${device.desktop} {
+            width: 134px;
+            height: 37px;
+            font-size: 15px;
+        }
     }
     .blue {
         background-color: var(--color-button);
