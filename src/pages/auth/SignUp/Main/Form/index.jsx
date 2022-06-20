@@ -1,23 +1,18 @@
-/* eslint-disable no-console */
 /* eslint-disable no-undef */
 import axios from "axios";
-import { useState } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-import handleError from "../../../../../utils/handleError";
+import { AuthContext } from "../../../../../providers/AuthProvider";
 import * as S from "./../../../styles";
 import Inputs from "./Inputs";
 import SubmitButton from "./SubmitButton";
+import handleError from "./../../../../../utils/handleError";
 
 const Form = () => {
     const navigate = useNavigate();
 
-    const [ signUpData, setSignUpData ] = useState({
-        email: "",
-        password: "",
-        username: "",
-        pictureUrl: ""
-    });
+    const { signUpData } = useContext(AuthContext);
 
     const signUp = (e) => {
         e.preventDefault();
@@ -31,7 +26,7 @@ const Form = () => {
 
     return (
         <S.Form onSubmit={signUp}>
-            <Inputs {...{signUpData, setSignUpData}}/>
+            <Inputs />
             <SubmitButton />
         </S.Form>
     );
