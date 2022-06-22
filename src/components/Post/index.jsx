@@ -179,7 +179,7 @@ const Post = ({
                             <Comments
                                 key={id}
                                 userId={userId}
-                                currentUserId={userIdStorage}
+                                currentUserId={userid}
                                 comment={comment}
                                 username={username}
                                 pictureUrl={pictureUrl}
