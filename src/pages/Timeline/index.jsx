@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 import { TimelineContext } from "../../providers/TimelineProvider";
 import { LoadingContext } from "../../providers/LoadingProvider";
+import { LikeContext } from "../../providers/LikeProvider";
+import { CommentsContext } from "../../providers/CommentsProvider";
 import isLogged from "../../utils/isLogged";
 
 import Header from "../../components/Header";
@@ -11,20 +13,20 @@ import Trending from "../../components/Trending";
 import UserPublish from "../../components/UserPublish";
 
 import * as S from "./style";
-import { LikeContext } from "../../providers/LikeProvider";
 
 const Timeline = () => {
     const navigate = useNavigate();
     const { DataPosts, catchPosts } = useContext(TimelineContext);
     const { getLikes, filterLikesPost } = useContext(LikeContext);
     const { update, setUpdate } = useContext(LoadingContext);
+    const { comments } = useContext(CommentsContext);
     useEffect(() => {
         if (!isLogged()) navigate("/sign-in");
         else {
             catchPosts();
             getLikes();
         }
-    }, [update]);
+    }, [update, comments]);
     return (
         <>
             <Header />
@@ -46,6 +48,7 @@ const Timeline = () => {
                                 article,
                                 link,
                                 urlMetadata,
+                                comments,
                             }) => (
                                 <Post
                                     key={id}
@@ -58,6 +61,7 @@ const Timeline = () => {
                                     likes={likes}
                                     link={link}
                                     urlMetadata={urlMetadata}
+                                    comments={comments}
                                     update={() => setUpdate(!update)}
                                 />
                             ),

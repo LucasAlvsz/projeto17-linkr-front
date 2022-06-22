@@ -7,6 +7,7 @@ import { UserPageProvider } from "./UserPageProvider";
 import { TimelineProvider } from "./TimelineProvider";
 import { LoadingProvider } from "./LoadingProvider";
 import { LikeProvider } from "./LikeProvider";
+import { CommentsProvider } from "./CommentsProvider";
 
 export default function AppProvider({ children }) {
     return (
@@ -16,7 +17,11 @@ export default function AppProvider({ children }) {
                     <UserPublishProvider>
                         <TrendingProvider>
                             <UserPageProvider>
-                                <LikeProvider>{children}</LikeProvider>
+                                <LikeProvider>
+                                    <CommentsProvider>
+                                        {children}
+                                    </CommentsProvider>
+                                </LikeProvider>
                             </UserPageProvider>
                         </TrendingProvider>
                     </UserPublishProvider>

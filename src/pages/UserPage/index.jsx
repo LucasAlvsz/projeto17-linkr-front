@@ -12,12 +12,14 @@ import UserPublish from "../../components/UserPublish";
 import * as S from "./styles";
 import { LoadingContext } from "../../providers/LoadingProvider";
 import { LikeContext } from "../../providers/LikeProvider";
+import { CommentsContext } from "../../providers/CommentsProvider";
 
 const UserPage = () => {
     const navigate = useNavigate();
     const { userPosts, getUserPosts } = useContext(UserPageContext);
     const { getLikes, filterLikesPost } = useContext(LikeContext);
     const { update, setUpdate } = useContext(LoadingContext);
+    const { comments } = useContext(CommentsContext);
     const { id } = useParams();
 
     useEffect(() => {
@@ -26,7 +28,7 @@ const UserPage = () => {
             getUserPosts(id);
             getLikes();
         }
-    }, [id, update]);
+    }, [id, update, comments]);
 
     return (
         <>
@@ -52,6 +54,7 @@ const UserPage = () => {
                                 article,
                                 link,
                                 urlMetadata,
+                                comments,
                             }) => (
                                 <Post
                                     key={id}
@@ -64,6 +67,7 @@ const UserPage = () => {
                                     link={link}
                                     likes={likes}
                                     urlMetadata={urlMetadata}
+                                    comments={comments}
                                     update={() => setUpdate(!update)}
                                 />
                             ),

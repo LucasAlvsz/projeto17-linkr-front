@@ -11,12 +11,14 @@ import Trending from "../../components/Trending";
 import * as S from "./styles";
 import { LoadingContext } from "../../providers/LoadingProvider";
 import { LikeContext } from "../../providers/LikeProvider";
+import { CommentsContext } from "../../providers/CommentsProvider";
 
 const Hashtag = () => {
     const navigate = useNavigate();
     const { hashtagPosts, getHashtagPosts } = useContext(TrendingContext);
     const { getLikes, filterLikesPost } = useContext(LikeContext);
     const { update, setUpdate } = useContext(LoadingContext);
+    const { comments } = useContext(CommentsContext);
     const { hashtag } = useParams();
     useEffect(() => {
         if (!isLogged()) navigate("/sign-in");
@@ -24,7 +26,7 @@ const Hashtag = () => {
             getHashtagPosts(hashtag);
             getLikes();
         }
-    }, [hashtag, update]);
+    }, [hashtag, update, comments]);
 
     return (
         <>
@@ -43,6 +45,7 @@ const Hashtag = () => {
                                 likes,
                                 link,
                                 urlMetadata,
+                                comments,
                             }) => (
                                 <Post
                                     key={id}
@@ -55,6 +58,7 @@ const Hashtag = () => {
                                     usersLikes={filterLikesPost(id)}
                                     link={link}
                                     urlMetadata={urlMetadata}
+                                    comments={comments}
                                     update={() => setUpdate(!update)}
                                 />
                             ),
