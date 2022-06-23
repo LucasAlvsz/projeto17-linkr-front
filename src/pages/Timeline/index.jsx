@@ -11,12 +11,14 @@ import Header from "../../components/Header";
 import Post from "../../components/Post";
 import Trending from "../../components/Trending";
 import UserPublish from "../../components/UserPublish";
+import UpdatePosts from "../../components/UpdatePosts";
 
 import * as S from "./style";
 
 const Timeline = () => {
     const navigate = useNavigate();
-    const { DataPosts, catchPosts } = useContext(TimelineContext);
+    const { DataPosts, catchPosts, NewPosts, uploadNewPosts } =
+        useContext(TimelineContext);
     const { getLikes, filterLikesPost } = useContext(LikeContext);
     const { update, setUpdate } = useContext(LoadingContext);
     const { comments } = useContext(CommentsContext);
@@ -27,6 +29,7 @@ const Timeline = () => {
             getLikes();
         }
     }, [update, comments]);
+    uploadNewPosts();
     return (
         <>
             <Header />
@@ -38,6 +41,13 @@ const Timeline = () => {
                         <S.UserPublishContainer>
                             <UserPublish />
                         </S.UserPublishContainer>
+                        <UpdatePosts
+                            numberPosts={
+                                DataPosts.length < NewPosts
+                                    ? NewPosts - DataPosts.length
+                                    : 0
+                            }
+                        />
                         {DataPosts?.map(
                             ({
                                 id,
