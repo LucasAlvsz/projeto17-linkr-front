@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import { UserPageContext } from "../../providers/UserPageProvider";
 import isLogged from "../../utils/isLogged";
+import getUserData from "../../utils/getUserData";
 
 import Header from "../../components/Header";
 import Post from "../../components/Post";
@@ -16,17 +17,25 @@ import { CommentsContext } from "../../providers/CommentsProvider";
 
 const UserPage = () => {
     const navigate = useNavigate();
-    const { userPosts, getUserPosts } = useContext(UserPageContext);
+    const {
+        userPosts,
+        getUserPosts,
+        amIFollower,
+        isFollower,
+        followOrUnfollow,
+    } = useContext(UserPageContext);
     const { getLikes, filterLikesPost } = useContext(LikeContext);
     const { update, setUpdate } = useContext(LoadingContext);
     const { comments } = useContext(CommentsContext);
     const { id } = useParams();
+    const userIdStorage = getUserData().userId;
 
     useEffect(() => {
         if (!isLogged()) navigate("/sign-in");
         else {
             getUserPosts(id);
             getLikes();
+            amIFollower(id);
         }
     }, [id, update, comments]);
 
@@ -41,8 +50,11 @@ const UserPage = () => {
                 <S.ContentContainer>
                     <S.PostsContainer>
                         <S.UserData>
-                            <S.UserImage src={userPosts.userpic} />
-                            {`${userPosts.username}'s Posts`}
+                            <div>
+                                <S.UserImage src={userPosts.userpic} />
+                                {`${userPosts.username}'s Posts`}
+                            </div>
+                            {/* <button>Follow</button> */}
                         </S.UserData>
                         {userPosts.posts?.map(
                             ({
@@ -74,6 +86,17 @@ const UserPage = () => {
                         )}
                     </S.PostsContainer>
                     <S.SidebarContainer>
+                        <S.ButtonFollow
+                            userId={id}
+                            userIdStorage={userIdStorage}
+                            isFollower={isFollower}
+                            onClick={() => {
+                                followOrUnfollow(id, isFollower);
+                                setUpdate(!update);
+                            }}
+                        >
+                            {isFollower ? "Following" : "Follow"}
+                        </S.ButtonFollow>
                         <Trending />
                     </S.SidebarContainer>
                 </S.ContentContainer>

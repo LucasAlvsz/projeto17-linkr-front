@@ -12,6 +12,7 @@ export const UserPageContext = createContext();
 export const UserPageProvider = ({ children }) => {
     const [usersSearchBar, setUsersSearchBar] = useState([]);
     const [userPosts, setUserPosts] = useState({});
+    const [isFollower, setIsFollower] = useState(false);
     const authHeader = authorizationHeader(getUserData()?.token);
 
     const getUserPosts = (userId) => {
@@ -37,6 +38,33 @@ export const UserPageProvider = ({ children }) => {
         }
     };
 
+    const amIFollower = async (userId) => {
+        try {
+            const response = await axios.get(
+                `${process.env.REACT_APP_URI}/user/${userId}/follow`,
+                authHeader,
+            );
+            setIsFollower(response.data);
+        } catch {
+            console.log("Error");
+        }
+    };
+
+    const followOrUnfollow = async (userId, Following) => {
+        console.log(userId, Following);
+        try {
+            const response = await axios.post(
+                `${process.env.REACT_APP_URI}/user/${userId}/follow`,
+                { Following },
+                authHeader,
+            );
+            console.log(response.data);
+            setIsFollower(response.data);
+        } catch {
+            console.log("Error");
+        }
+    };
+
     return (
         <UserPageContext.Provider
             value={{
@@ -44,6 +72,9 @@ export const UserPageProvider = ({ children }) => {
                 getUsersSearchBar,
                 userPosts,
                 getUserPosts,
+                amIFollower,
+                isFollower,
+                followOrUnfollow,
             }}
         >
             {children}
