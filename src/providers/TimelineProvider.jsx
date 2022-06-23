@@ -37,8 +37,6 @@ export const TimelineProvider = ({ children }) => {
                 authHeader,
             );
             promise.then(({ data }) => {
-                console.log({ atualizacao: data.length });
-                console.log({ posts: DataPosts.length });
                 setNewPosts(data.length);
             });
             promise.catch((res) => {
