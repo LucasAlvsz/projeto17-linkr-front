@@ -37,6 +37,7 @@ const SearchBar = () => {
                         >
                             <S.UserImage src={user.userpic}></S.UserImage>
                             <p>{user.username}</p>
+                            <span>{user.isFollower && "• following"}</span>
                         </a>
                     );
                 })}
