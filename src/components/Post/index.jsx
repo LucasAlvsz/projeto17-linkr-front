@@ -55,7 +55,6 @@ const Post = ({
         countLikes,
         usersLikes,
     );
-
     const currentUserId = userId;
     return (
         <S.Wrapper isRepost={isRepost}>

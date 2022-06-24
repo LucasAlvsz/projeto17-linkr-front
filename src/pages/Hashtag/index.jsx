@@ -10,13 +10,11 @@ import Trending from "../../components/Trending";
 
 import * as S from "./styles";
 import { LoadingContext } from "../../providers/LoadingProvider";
-import { LikeContext } from "../../providers/LikeProvider";
 import { CommentsContext } from "../../providers/CommentsProvider";
 
 const Hashtag = () => {
     const navigate = useNavigate();
     const { hashtagPosts, getHashtagPosts } = useContext(TrendingContext);
-    const { getLikes, filterLikesPost } = useContext(LikeContext);
     const { update, setUpdate } = useContext(LoadingContext);
     const { comments } = useContext(CommentsContext);
     const { hashtag } = useParams();
@@ -24,7 +22,6 @@ const Hashtag = () => {
         if (!isLogged()) navigate("/sign-in");
         else {
             getHashtagPosts(hashtag);
-            getLikes();
         }
     }, [hashtag, update, comments]);
 
@@ -40,10 +37,12 @@ const Hashtag = () => {
                                 id,
                                 username,
                                 userpic,
-                                userId,
-                                article,
                                 likes,
+                                userId,
+                                hasLiked,
+                                article,
                                 link,
+                                countLikes,
                                 urlMetadata,
                                 comments,
                             }) => (
@@ -51,12 +50,13 @@ const Hashtag = () => {
                                     key={id}
                                     postId={id}
                                     username={username}
-                                    userpic={userpic}
-                                    userid={userId}
+                                    userPic={userpic}
+                                    userId={userId}
+                                    hasLiked={hasLiked}
                                     article={article}
-                                    likes={likes}
-                                    usersLikes={filterLikesPost(id)}
                                     link={link}
+                                    usersLikes={likes}
+                                    countLikes={countLikes}
                                     urlMetadata={urlMetadata}
                                     comments={comments}
                                     update={() => setUpdate(!update)}

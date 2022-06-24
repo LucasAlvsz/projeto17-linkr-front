@@ -12,7 +12,6 @@ import UserPublish from "../../components/UserPublish";
 
 import * as S from "./styles";
 import { LoadingContext } from "../../providers/LoadingProvider";
-import { LikeContext } from "../../providers/LikeProvider";
 import { CommentsContext } from "../../providers/CommentsProvider";
 
 const UserPage = () => {
@@ -24,7 +23,6 @@ const UserPage = () => {
         isFollower,
         followOrUnfollow,
     } = useContext(UserPageContext);
-    const { getLikes, filterLikesPost } = useContext(LikeContext);
     const { update, setUpdate } = useContext(LoadingContext);
     const { comments } = useContext(CommentsContext);
     const { id } = useParams();
@@ -34,11 +32,9 @@ const UserPage = () => {
         if (!isLogged()) navigate("/sign-in");
         else {
             getUserPosts(id);
-            getLikes();
             amIFollower(id);
         }
     }, [id, update, comments]);
-
     return (
         <>
             <Header />
@@ -62,9 +58,11 @@ const UserPage = () => {
                                 username,
                                 userpic,
                                 likes,
-                                userId,
+                                userid,
+                                hasLiked,
                                 article,
                                 link,
+                                countLikes,
                                 urlMetadata,
                                 comments,
                             }) => (
@@ -72,12 +70,13 @@ const UserPage = () => {
                                     key={id}
                                     postId={id}
                                     username={username}
-                                    userpic={userpic}
-                                    userid={userId}
+                                    userPic={userpic}
+                                    userId={userid}
+                                    hasLiked={hasLiked}
                                     article={article}
-                                    usersLikes={filterLikesPost(id)}
                                     link={link}
-                                    likes={likes}
+                                    usersLikes={likes}
+                                    countLikes={countLikes}
                                     urlMetadata={urlMetadata}
                                     comments={comments}
                                     update={() => setUpdate(!update)}

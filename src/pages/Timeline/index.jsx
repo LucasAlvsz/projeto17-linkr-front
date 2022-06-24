@@ -10,7 +10,7 @@ import Header from "../../components/Header";
 import Post from "../../components/Post";
 import Trending from "../../components/Trending";
 import UserPublish from "../../components/UserPublish";
-import UpdatePosts from "../../components/UpdatePosts";
+// import UpdatePosts from "../../components/UpdatePosts";
 
 import * as S from "./style";
 
@@ -24,7 +24,6 @@ const Timeline = () => {
         if (!isLogged()) navigate("/sign-in");
         else catchPosts();
     }, [update, comments]);
-    uploadNewPosts();
     return (
         <>
             <Header />

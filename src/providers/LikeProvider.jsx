@@ -22,9 +22,9 @@ export const LikeProvider = ({ children }) => {
             .catch((err) => console.log(err, "//viana faça"));
     };
 
-    const buildTooltipMessage = (userLiked, countLikes, usersLikes) => {
+    const buildTooltipMessage = (hasLiked, countLikes, usersLikes) => {
         countLikes = parseInt(countLikes);
-        if (userLiked) {
+        if (hasLiked) {
             const message =
                 countLikes === 1
                     ? "Você"
