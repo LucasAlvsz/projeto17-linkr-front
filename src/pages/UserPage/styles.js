@@ -17,6 +17,7 @@ export const UserData = styled.h1`
     width: 100%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     font-family: var(--secondary-font);
     font-weight: 700;
     font-size: 33px;
@@ -24,6 +25,37 @@ export const UserData = styled.h1`
     color: var(--secondary-color);
     margin: 19px 17px 19px;
     display: none;
+    /* button {
+        width: 112px;
+        height: 31px;
+        border-radius: 5px;
+        background-color: var(--color-button);
+        font-weight: 700;
+        display: none;
+    } */
+
+    div {
+        align-items: center;
+        display: flex;
+    }
+
+    button {
+        width: 112px;
+        height: 31px;
+        border-radius: 5px;
+        background-color: var(--color-button);
+        font-family: var(--primary-font);
+        color: var(--secondary-color);
+    }
+
+    @media ${device.desktop} {
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
     @media ${device.desktop} {
         font-size: 43px;
         line-height: 64px;
@@ -56,8 +88,24 @@ export const SidebarContainer = styled.div`
         width: auto;
         height: 100%;
         display: flex;
-        margin-top: 158px;
+        flex-direction: column;
+        align-items: flex-end;
+        margin-top: 68px;
     }
+`;
+
+export const ButtonFollow = styled.button`
+    width: 112px;
+    height: 31px;
+    border-radius: 5px;
+    background-color: ${({ isFollower }) =>
+        isFollower ? "#1877F2" : "#FFFFFF"};
+    margin-bottom: 60px;
+    font-family: var(--primary-font);
+    font-weight: 700;
+    color: ${({ isFollower }) => (isFollower ? "#FFFFFF" : "#1877F2")};
+    visibility: ${({ userId, userIdStorage }) =>
+        userId == userIdStorage ? "hidden" : "visible"};
 `;
 
 export const UserImage = styled.div`
