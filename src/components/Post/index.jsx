@@ -14,8 +14,9 @@ import { PublishContext } from "../../providers/UserPublishProvider";
 import { LikeContext } from "../../providers/LikeProvider";
 import { CommentsContext } from "../../providers/CommentsProvider";
 import { RepostContext } from "../../providers/RepostProvider";
+import { LoadingContext } from "../../providers/LoadingProvider";
 
-import ScreenDelete from "../ScreendDelete";
+import ScreenDelete from "../ConfirmModal";
 import Comments from "../Comments";
 
 import * as S from "./styles";
@@ -43,7 +44,9 @@ const Post = ({
     const { editPost } = useContext(PublishContext);
     const { newRepost } = useContext(RepostContext);
     const [deletePost, setDeletePost] = useState(false);
+    const [repostPost, setRepostPost] = useState(false);
     const [editPostState, setEditPostState] = useState(false);
+    const { setLoading } = useContext(LoadingContext);
     const [openComments, setOpenComments] = useState(false);
     const [articleLog, setArticleLog] = useState(article);
     const userIdStorage = getUserData().userId;
@@ -71,10 +74,36 @@ const Post = ({
                 <S.PostContainer openComments={openComments}>
                     {deletePost && (
                         <ScreenDelete
-                            setDeletePost={() =>
-                                setDeletePost(!deletePost)
-                            }
+                            closeModal={() => setDeletePost(true)}
                             postId={postId}
+                            tittle={
+                                "Are you sure you want to delete this post?"
+                            }
+                            cancelButton={"No, go back"}
+                            confirmButton={"Yes, delete it"}
+                            modalFunction={() => {
+                                setLoading(true);
+                                deletePost(postId, () => {
+                                    setDeletePost(false);
+                                });
+                            }}
+                        />
+                    )}
+                    {repostPost && (
+                        <ScreenDelete
+                            closeModal={() => setRepostPost(false)}
+                            postId={postId}
+                            tittle={
+                                "Do you want to re-post this link?"
+                            }
+                            cancelButton={"No, cancel"}
+                            confirmButton={"Yes, share"}
+                            modalFunction={() => {
+                                setLoading(true);
+                                newRepost(postId, () => {
+                                    setRepostPost(false);
+                                });
+                            }}
                         />
                     )}
                     <S.PostSideContainer>
@@ -122,7 +151,9 @@ const Post = ({
                         )}
                         {repostsCount && (
                             <>
-                                <RepostIcon onClick={() => newRepost(postId)} />
+                                <RepostIcon
+                                    onClick={() => setRepostPost(true)}
+                                />
                                 <p>{`${repostsCount} reposts`}</p>
                             </>
                         )}
