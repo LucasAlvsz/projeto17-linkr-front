@@ -75,6 +75,7 @@ export const UserImage = styled.div`
 `;
 
 export const UserPublishContainer = styled.div`
+    z-index: 1;
     @media (max-width: 611px) {
         width: 100%;
     }
