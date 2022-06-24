@@ -90,8 +90,8 @@ const UserPage = () => {
                             userId={id}
                             userIdStorage={userIdStorage}
                             isFollower={isFollower}
-                            onClick={() => {
-                                followOrUnfollow(id, isFollower);
+                            onClick={async () => {
+                                await followOrUnfollow(id, isFollower);
                                 setUpdate(!update);
                             }}
                         >

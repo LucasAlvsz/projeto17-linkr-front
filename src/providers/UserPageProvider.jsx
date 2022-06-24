@@ -51,14 +51,12 @@ export const UserPageProvider = ({ children }) => {
     };
 
     const followOrUnfollow = async (userId, Following) => {
-        console.log(userId, Following);
         try {
             const response = await axios.post(
                 `${process.env.REACT_APP_URI}/user/${userId}/follow`,
                 { Following },
                 authHeader,
             );
-            console.log(response.data);
             setIsFollower(response.data);
         } catch {
             console.log("Error");

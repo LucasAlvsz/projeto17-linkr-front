@@ -2,7 +2,7 @@
 import * as S from "./styles";
 import { AiOutlineSearch } from "react-icons/ai";
 import { DebounceInput } from "react-debounce-input";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { UserPageContext } from "../../providers/UserPageProvider";
@@ -11,6 +11,10 @@ import { UserPageContext } from "../../providers/UserPageProvider";
 const SearchBar = () => {
     const navigate = useNavigate();
     const { getUsersSearchBar, usersSearchBar } = useContext(UserPageContext);
+
+    useEffect(() => {
+        getUsersSearchBar();
+    }, []);
 
     return (
         <S.SearchBarContainer>
