@@ -14,8 +14,9 @@ import { PublishContext } from "../../providers/UserPublishProvider";
 import { LikeContext } from "../../providers/LikeProvider";
 import { CommentsContext } from "../../providers/CommentsProvider";
 import { RepostContext } from "../../providers/RepostProvider";
+import { LoadingContext } from "../../providers/LoadingProvider";
 
-import ScreenDelete from "../ScreendDelete";
+import ScreenDelete from "../ConfirmModal";
 import Comments from "../Comments";
 
 import * as S from "./styles";
@@ -38,15 +39,20 @@ const Post = ({
     hasLiked,
 }) => {
     const navigate = useNavigate();
-    const { addComment, newComment, setNewComment } =
-        useContext(CommentsContext);
+    const { addComment } = useContext(CommentsContext);
     const { likePost, buildTooltipMessage } = useContext(LikeContext);
     const { editPost } = useContext(PublishContext);
     const { newRepost } = useContext(RepostContext);
 
     const [deletePost, setDeletePost] = useState(false);
+    const [repostPost, setRepostPost] = useState(false);
     const [editPostState, setEditPostState] = useState(false);
+    const { setLoading } = useContext(LoadingContext);
+
     const [openComments, setOpenComments] = useState(false);
+    const [newComments, setNewComments] = useState(comments);
+    const [newCommentLog, setNewCommentLog] = useState("");
+
     const [articleLog, setArticleLog] = useState(article);
 
     const currentUserId = userId;
@@ -80,8 +86,34 @@ const Post = ({
                 <S.PostContainer openComments={openComments}>
                     {deletePost && (
                         <ScreenDelete
-                            setDeletePost={() => setDeletePost(!deletePost)}
+                            closeModal={() => setDeletePost(true)}
                             postId={postId}
+                            tittle={
+                                "Are you sure you want to delete this post?"
+                            }
+                            cancelButton={"No, go back"}
+                            confirmButton={"Yes, delete it"}
+                            modalFunction={() => {
+                                setLoading(true);
+                                deletePost(postId, () => {
+                                    setDeletePost(false);
+                                });
+                            }}
+                        />
+                    )}
+                    {repostPost && (
+                        <ScreenDelete
+                            closeModal={() => setRepostPost(false)}
+                            postId={postId}
+                            tittle={"Do you want to re-post this link?"}
+                            cancelButton={"No, cancel"}
+                            confirmButton={"Yes, share"}
+                            modalFunction={() => {
+                                setLoading(true);
+                                newRepost(postId, () => {
+                                    setRepostPost(false);
+                                });
+                            }}
                         />
                     )}
                     <S.PostSideContainer>
@@ -129,7 +161,9 @@ const Post = ({
                         )}
                         {repostsCount && (
                             <>
-                                <RepostIcon onClick={() => newRepost(postId)} />
+                                <RepostIcon
+                                    onClick={() => setRepostPost(true)}
+                                />
                                 <p>{`${repostsCount} reposts`}</p>
                             </>
                         )}
@@ -210,7 +244,7 @@ const Post = ({
             </span>
             {openComments && (
                 <S.CommentsContainer>
-                    {comments.map(
+                    {newComments.map(
                         ({ id, userId, comment, username, pictureUrl }) => (
                             <Comments
                                 key={id}
@@ -228,16 +262,22 @@ const Post = ({
                         <form
                             onSubmit={(e) => {
                                 e.preventDefault();
-                                addComment(newComment, postId);
-                                setNewComment("");
+                                addComment(newCommentLog, postId, (data) => {
+                                    const newCommentTemp = [...newComments];
+                                    newCommentTemp.unshift(data);
+                                    setNewComments([...newCommentTemp]);
+                                });
+                                setNewCommentLog("");
                             }}
                         >
                             <input
                                 placeholder="Write a comment..."
                                 type="text"
-                                value={newComment}
+                                value={newCommentLog}
                                 required
-                                onChange={(e) => setNewComment(e.target.value)}
+                                onChange={(e) =>
+                                    setNewCommentLog(e.target.value)
+                                }
                             />
                         </form>
                     </S.WriteCommentContainer>
