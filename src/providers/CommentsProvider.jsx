@@ -16,14 +16,13 @@ export const CommentsProvider = ({ children }) => {
         setOpenComments(!openComments);
     };
 
-    const addComment = (postId, userId, comment) => {
-        const data = {
-            postId,
-            userId,
-            comment,
-        };
+    const addComment = (comment, postId) => {
         axios
-            .post(`${process.env.REACT_APP_URI}/comments`, data, authHeader)
+            .post(
+                `${process.env.REACT_APP_URI}/comments/${postId}`,
+                { comment },
+                authHeader,
+            )
             .then(({ data }) => {
                 setComments([...comments, data]);
             })

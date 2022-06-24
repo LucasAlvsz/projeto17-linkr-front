@@ -10,12 +10,9 @@ import getUserData from "../utils/getUserData";
 export const TimelineContext = createContext();
 
 export const TimelineProvider = ({ children }) => {
-    const [DataPosts, setDataPosts] = useState([]);
-    const [NewPosts, setNewPosts] = useState(0);
+    const [dataPosts, setDataPosts] = useState([]);
     const authHeader = authorizationHeader(getUserData()?.token);
-    //console.log(authHeader, "primeiro");
     const catchPosts = () => {
-        //console.log(authHeader);
         if (!authHeader) return catchPosts();
         const promise = axios.get(
             `${process.env.REACT_APP_URI}/timeline`,
@@ -45,9 +42,8 @@ export const TimelineProvider = ({ children }) => {
         }, 15000);
     };
     return (
-        <TimelineContext.Provider
-            value={{ DataPosts, catchPosts, NewPosts, uploadNewPosts }}
-        >
+        <TimelineContext.Provider value={{ dataPosts, catchPosts }}>
+
             {children}
         </TimelineContext.Provider>
     );
