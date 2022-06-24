@@ -7,9 +7,9 @@ import getUserData from "../utils/getUserData";
 export const CommentsContext = createContext();
 
 export const CommentsProvider = ({ children }) => {
-    const authHeader = authorizationHeader(getUserData()?.token);
-
+    let authHeader;
     const addComment = (comment, postId, setComments) => {
+        authHeader = authorizationHeader(getUserData()?.token);
         axios
             .post(
                 `${process.env.REACT_APP_URI}/comments/${postId}`,

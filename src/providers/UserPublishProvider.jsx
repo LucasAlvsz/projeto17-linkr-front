@@ -13,8 +13,9 @@ export const PublishContext = createContext();
 export const UserPublishProvider = ({ children }) => {
     const { update, setUpdate } = useContext(LoadingContext);
     const [response, setResponse] = useState(false);
-    const authHeader = authorizationHeader(getUserData()?.token);
+    let authHeader;
     const publishSubmit = (data) => {
+        authHeader = authorizationHeader(getUserData()?.token);
         const promise = axios.post(
             `${process.env.REACT_APP_URI}/post`,
             data,
@@ -30,6 +31,7 @@ export const UserPublishProvider = ({ children }) => {
     };
 
     const deletePost = async (postId, setDeletePost) => {
+        authHeader = authorizationHeader(getUserData()?.token);
         axios
             .delete(`${process.env.REACT_APP_URI}/post/${postId}`, authHeader)
             .then(() => {
@@ -39,6 +41,7 @@ export const UserPublishProvider = ({ children }) => {
     };
 
     const editPost = async (postId, data) => {
+        authHeader = authorizationHeader(getUserData()?.token);
         try {
             await axios.put(
                 `${process.env.REACT_APP_URI}/post/${postId}`,

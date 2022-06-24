@@ -7,9 +7,10 @@ import getUserData from "../utils/getUserData";
 export const RepostContext = createContext();
 
 export const RepostProvider = ({ children }) => {
-    const authHeader = authorizationHeader(getUserData()?.token);
+    let authHeader;
 
     const newRepost = (postId) => {
+        authHeader = authorizationHeader(getUserData()?.token);
         axios
             .post(
                 `${process.env.REACT_APP_URI}/reposts/${postId}`,

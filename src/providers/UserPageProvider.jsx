@@ -15,9 +15,10 @@ export const UserPageProvider = ({ children }) => {
     const [userPosts, setUserPosts] = useState({});
     const [isFollower, setIsFollower] = useState(false);
     const { setLoading } = useContext(LoadingContext);
-    const authHeader = authorizationHeader(getUserData()?.token);
+    let authHeader;
 
     const getUserPosts = (userId) => {
+        authHeader = authorizationHeader(getUserData()?.token);
         axios
             .get(`${process.env.REACT_APP_URI}/user/${userId}`, authHeader)
             .then(({ data }) => {
@@ -30,6 +31,7 @@ export const UserPageProvider = ({ children }) => {
     };
 
     const getUsersSearchBar = async (search) => {
+        authHeader = authorizationHeader(getUserData()?.token);
         try {
             const users = await axios.get(
                 `${process.env.REACT_APP_URI}/user/?search=${search}`,
@@ -42,6 +44,7 @@ export const UserPageProvider = ({ children }) => {
     };
 
     const amIFollower = async (userId) => {
+        authHeader = authorizationHeader(getUserData()?.token);
         try {
             const response = await axios.get(
                 `${process.env.REACT_APP_URI}/user/${userId}/follow`,
@@ -54,6 +57,7 @@ export const UserPageProvider = ({ children }) => {
     };
 
     const followOrUnfollow = async (userId, Following) => {
+        authHeader = authorizationHeader(getUserData()?.token);
         try {
             const response = await axios.post(
                 `${process.env.REACT_APP_URI}/user/${userId}/follow`,

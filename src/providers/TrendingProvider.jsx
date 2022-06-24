@@ -14,9 +14,10 @@ export const TrendingProvider = ({ children }) => {
     const [trending, setTrending] = useState([]);
     const { setLoading } = useContext(LoadingContext);
     const [hashtagPosts, setHashtagPosts] = useState([]);
-    const authHeader = authorizationHeader(getUserData()?.token);
+    let authHeader;
 
     const getTrending = () => {
+        authHeader = authorizationHeader(getUserData()?.token);
         axios
             .get(`${process.env.REACT_APP_URI}/trending`, authHeader)
             .then(({ data }) => {
@@ -28,6 +29,7 @@ export const TrendingProvider = ({ children }) => {
     };
 
     const getHashtagPosts = (hashtag) => {
+        authHeader = authorizationHeader(getUserData()?.token);
         axios
             .get(`${process.env.REACT_APP_URI}/hashtag/${hashtag}`, authHeader)
             .then(({ data }) => {

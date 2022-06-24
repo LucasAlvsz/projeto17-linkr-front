@@ -13,9 +13,9 @@ export const TimelineContext = createContext();
 export const TimelineProvider = ({ children }) => {
     const [dataPosts, setDataPosts] = useState([]);
     const { setLoading } = useContext(LoadingContext);
-    const authHeader = authorizationHeader(getUserData()?.token);
+    let authHeader;
     const catchPosts = () => {
-        if (!authHeader) return catchPosts();
+        authHeader = authorizationHeader(getUserData()?.token);
         const promise = axios.get(
             `${process.env.REACT_APP_URI}/timeline`,
             authHeader,
@@ -29,7 +29,7 @@ export const TimelineProvider = ({ children }) => {
         });
     };
     const uploadNewPosts = () => {
-        if (!authHeader) return catchPosts();
+        authHeader = authorizationHeader(getUserData()?.token);
         const promise = axios.get(
             `${process.env.REACT_APP_URI}/timeline`,
             authHeader,
