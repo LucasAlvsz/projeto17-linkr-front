@@ -20,7 +20,7 @@ const Form = () => {
         signIn(signInData.email, signInData.password);
         setTimeout(() => {
             navigate("/timeline");
-        }, 1000);
+        }, 1500);
     };
     return (
         <S.Form onSubmit={handleSignIn}>

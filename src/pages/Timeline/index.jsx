@@ -3,28 +3,28 @@ import { useNavigate } from "react-router-dom";
 
 import { TimelineContext } from "../../providers/TimelineProvider";
 import { LoadingContext } from "../../providers/LoadingProvider";
+import { CommentsContext } from "../../providers/CommentsProvider";
 import isLogged from "../../utils/isLogged";
 
 import Header from "../../components/Header";
 import Post from "../../components/Post";
 import Trending from "../../components/Trending";
 import UserPublish from "../../components/UserPublish";
+import UpdatePosts from "../../components/UpdatePosts";
 
 import * as S from "./style";
-import { LikeContext } from "../../providers/LikeProvider";
 
 const Timeline = () => {
     const navigate = useNavigate();
-    const { DataPosts, catchPosts } = useContext(TimelineContext);
-    const { getLikes, filterLikesPost } = useContext(LikeContext);
-    const { update, setUpdate } = useContext(LoadingContext);
+    const { dataPosts, catchPosts } = useContext(TimelineContext);
+    const { update } = useContext(LoadingContext);
+    const { comments } = useContext(CommentsContext);
+
     useEffect(() => {
         if (!isLogged()) navigate("/sign-in");
-        else {
-            catchPosts();
-            getLikes();
-        }
-    }, [update]);
+        else catchPosts();
+    }, [update, comments]);
+    uploadNewPosts();
     return (
         <>
             <Header />
@@ -36,29 +36,39 @@ const Timeline = () => {
                         <S.UserPublishContainer>
                             <UserPublish />
                         </S.UserPublishContainer>
-                        {DataPosts?.map(
+                        {dataPosts?.map(
                             ({
                                 id,
                                 username,
-                                userpic,
-                                likes,
+                                userPic,
                                 userId,
                                 article,
                                 link,
                                 urlMetadata,
+                                comments,
+                                isRepost,
+                                repostedBy,
+                                repostsCount,
+                                likes,
+                                countLikes,
+                                hasLiked,
                             }) => (
                                 <Post
-                                    key={id}
+                                    key={isRepost ? id + Math.random() : id} //viana faça
                                     postId={id}
                                     username={username}
-                                    userpic={userpic}
-                                    userid={userId}
+                                    userPic={userPic}
+                                    userId={userId}
                                     article={article}
-                                    usersLikes={filterLikesPost(id)}
-                                    likes={likes}
                                     link={link}
                                     urlMetadata={urlMetadata}
-                                    update={() => setUpdate(!update)}
+                                    comments={comments}
+                                    isRepost={isRepost}
+                                    repostedBy={repostedBy}
+                                    repostsCount={repostsCount}
+                                    usersLikes={likes}
+                                    countLikes={countLikes}
+                                    hasLiked={hasLiked}
                                 />
                             ),
                         )}

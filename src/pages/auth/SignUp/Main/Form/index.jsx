@@ -22,7 +22,7 @@ const Form = () => {
         const url = `${process.env.REACT_APP_URI}/sign-up`;
         axios
             .post(url, signUpData)
-            .then(() => navigate("/timeline"))
+            .then(() => navigate("/sign-in"))
             .catch(() => {
                 handleError;
             });

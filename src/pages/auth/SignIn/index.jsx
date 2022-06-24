@@ -9,7 +9,11 @@ import * as S from "./../styles";
 const SignIn = () => {
     const navigate = useNavigate();
     useEffect(() => {
-        if (isLogged()) navigate("/timeline");
+        if (isLogged()) {
+            setTimeout(() => {
+                navigate("/timeline");
+            }, 1000);
+        }
     }, []);
     return (
         <S.AuthContainer>

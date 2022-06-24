@@ -29,7 +29,6 @@ export const TrendingProvider = ({ children }) => {
         axios
             .get(`${process.env.REACT_APP_URI}/hashtag/${hashtag}`, authHeader)
             .then(({ data }) => {
-                console.log(data);
                 setHashtagPosts(data);
             })
             .catch(({ response }) => {

@@ -7,12 +7,19 @@ import setUserData from "../utils/setUserData";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const signIn = (email, password) => {
-        axios
-            .post(`${process.env.REACT_APP_URI}/sign-in`, { email, password })
-            .then(({ data }) => {
-                setUserData(data);
-            });
+    const signIn = async (email, password) => {
+        try {
+            const { data } = await axios.post(
+                `${process.env.REACT_APP_URI}/sign-in`,
+                {
+                    email,
+                    password,
+                },
+            );
+            setUserData(data);
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     const logout = () => {
