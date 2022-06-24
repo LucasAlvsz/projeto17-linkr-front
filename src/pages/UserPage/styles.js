@@ -4,6 +4,8 @@ import device from "../../utils/devicesSizes";
 export const Main = styled.main`
     width: 100%;
     height: calc(100vh - 72px);
+    z-index: -2;
+    position: absolute;
     display: flex;
     flex-direction: column;
     overflow: auto;

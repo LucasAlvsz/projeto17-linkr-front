@@ -3,6 +3,8 @@ import device from "../../utils/devicesSizes";
 
 export const Main = styled.main`
     width: 100%;
+    z-index: -2;
+    position: absolute;
     height: calc(100vh - 72px);
     display: flex;
     flex-direction: column;
