@@ -31,6 +31,7 @@ const Post = ({
     comments,
     isRepost,
     repostedBy,
+    repostedById,
     repostsCount,
     usersLikes,
     countLikes,
@@ -42,10 +43,13 @@ const Post = ({
     const { likePost, buildTooltipMessage } = useContext(LikeContext);
     const { editPost } = useContext(PublishContext);
     const { newRepost } = useContext(RepostContext);
+
     const [deletePost, setDeletePost] = useState(false);
     const [editPostState, setEditPostState] = useState(false);
     const [openComments, setOpenComments] = useState(false);
     const [articleLog, setArticleLog] = useState(article);
+
+    const currentUserId = userId;
     const userIdStorage = getUserData().userId;
     const currentUserPic = getUserData().pictureUrl;
     const tooltipMessage = buildTooltipMessage(
@@ -53,7 +57,7 @@ const Post = ({
         countLikes,
         usersLikes,
     );
-    const currentUserId = userId;
+
     return (
         <S.Wrapper isRepost={isRepost}>
             <span>
@@ -62,7 +66,12 @@ const Post = ({
                         <S.RepostedBy>
                             <RepostIcon />
                             <S.RepostedByText>
-                                Re-posted by <span>{repostedBy}</span>
+                                Re-posted by{" "}
+                                <span>
+                                    {repostedById === userIdStorage
+                                        ? "you"
+                                        : repostedBy}
+                                </span>
                             </S.RepostedByText>
                         </S.RepostedBy>
                     </S.repostContainer>
@@ -71,9 +80,7 @@ const Post = ({
                 <S.PostContainer openComments={openComments}>
                     {deletePost && (
                         <ScreenDelete
-                            setDeletePost={() =>
-                                setDeletePost(!deletePost)
-                            }
+                            setDeletePost={() => setDeletePost(!deletePost)}
                             postId={postId}
                         />
                     )}

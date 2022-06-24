@@ -23,9 +23,7 @@ const Hashtag = () => {
     useLayoutEffect(() => {
         setLoading(true);
         if (!isLogged()) navigate("/sign-in");
-        else {
-            getHashtagPosts(hashtag);
-        }
+        else getHashtagPosts(hashtag);
     }, [hashtag, update, comments]);
 
     return (
@@ -42,29 +40,31 @@ const Hashtag = () => {
                                 ({
                                     id,
                                     username,
-                                    userpic,
-                                    likes,
+                                    userPic,
                                     userId,
-                                    hasLiked,
                                     article,
                                     link,
-                                    countLikes,
                                     urlMetadata,
                                     comments,
+                                    repostsCount,
+                                    likes,
+                                    countLikes,
+                                    hasLiked,
                                 }) => (
                                     <Post
                                         key={id}
                                         postId={id}
                                         username={username}
-                                        userPic={userpic}
+                                        userPic={userPic}
                                         userId={userId}
-                                        hasLiked={hasLiked}
                                         article={article}
                                         link={link}
-                                        usersLikes={likes}
-                                        countLikes={countLikes}
                                         urlMetadata={urlMetadata}
                                         comments={comments}
+                                        repostsCount={repostsCount}
+                                        usersLikes={likes}
+                                        countLikes={countLikes}
+                                        hasLiked={hasLiked}
                                         update={() => setUpdate(!update)}
                                     />
                                 ),

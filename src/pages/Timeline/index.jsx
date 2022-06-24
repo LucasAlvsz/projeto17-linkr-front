@@ -51,13 +51,14 @@ const Timeline = () => {
                                     comments,
                                     isRepost,
                                     repostedBy,
+                                    repostedById,
                                     repostsCount,
                                     likes,
                                     countLikes,
                                     hasLiked,
                                 }) => (
                                     <Post
-                                        key={isRepost ? id + Math.random() : id} //viana faça
+                                        key={isRepost ? id + Math.random() : id}
                                         postId={id}
                                         username={username}
                                         userPic={userPic}
@@ -68,6 +69,7 @@ const Timeline = () => {
                                         comments={comments}
                                         isRepost={isRepost}
                                         repostedBy={repostedBy}
+                                        repostedById={repostedById}
                                         repostsCount={repostsCount}
                                         usersLikes={likes}
                                         countLikes={countLikes}

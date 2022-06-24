@@ -62,29 +62,31 @@ const UserPage = () => {
                                 ({
                                     id,
                                     username,
-                                    userpic,
-                                    likes,
-                                    userid,
-                                    hasLiked,
+                                    userPic,
+                                    userId,
                                     article,
                                     link,
-                                    countLikes,
                                     urlMetadata,
                                     comments,
+                                    repostsCount,
+                                    likes,
+                                    countLikes,
+                                    hasLiked,
                                 }) => (
                                     <Post
                                         key={id}
                                         postId={id}
                                         username={username}
-                                        userPic={userpic}
-                                        userId={userid}
-                                        hasLiked={hasLiked}
+                                        userPic={userPic}
+                                        userId={userId}
                                         article={article}
                                         link={link}
-                                        usersLikes={likes}
-                                        countLikes={countLikes}
                                         urlMetadata={urlMetadata}
                                         comments={comments}
+                                        repostsCount={repostsCount}
+                                        usersLikes={likes}
+                                        countLikes={countLikes}
+                                        hasLiked={hasLiked}
                                         update={() => setUpdate(!update)}
                                     />
                                 ),
