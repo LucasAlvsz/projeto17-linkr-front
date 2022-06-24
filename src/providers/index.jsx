@@ -8,6 +8,7 @@ import { TimelineProvider } from "./TimelineProvider";
 import { LoadingProvider } from "./LoadingProvider";
 import { LikeProvider } from "./LikeProvider";
 import { CommentsProvider } from "./CommentsProvider";
+import { RepostProvider } from "./RepostProvider";
 
 export default function AppProvider({ children }) {
     return (
@@ -19,7 +20,9 @@ export default function AppProvider({ children }) {
                             <UserPageProvider>
                                 <LikeProvider>
                                     <CommentsProvider>
-                                        {children}
+                                        <RepostProvider>
+                                            {children}
+                                        </RepostProvider>
                                     </CommentsProvider>
                                 </LikeProvider>
                             </UserPageProvider>

@@ -9,6 +9,12 @@ export const Wrapper = styled.div`
     align-items: center;
     flex-direction: column;
     margin-bottom: 16px;
+    > span {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        margin-top: ${({ isRepost }) => (isRepost ? "48px" : "0")};
+    }
 `;
 
 export const PostContainer = styled.div`
@@ -19,13 +25,47 @@ export const PostContainer = styled.div`
     align-items: center;
     background-color: var(--primary-color);
     padding: 10px 15px 15px;
-
     @media ${device.desktop} {
         max-width: 611px;
         height: 276px;
         padding: 18px;
         border-radius: ${({ openComments }) =>
             openComments ? "16px 16px 0 0" : "16px 16px 16px 16px"};
+    }
+`;
+
+export const repostContainer = styled.div`
+    position: absolute;
+    top: -33px;
+    left: 0;
+    width: 100%;
+    height: 66px;
+    display: flex;
+    background: #1e1e1e;
+    border-radius: 16px;
+    padding: 0 13px;
+`;
+
+export const RepostedBy = styled.div`
+    width: auto;
+    height: 20px;
+    display: flex;
+    font-family: var(--primary-font);
+    font-size: 11px;
+    line-height: 13px;
+    color: #ffffff;
+    svg {
+        margin-top: 11px;
+    }
+`;
+
+export const RepostedByText = styled.p`
+    font-weight: 400;
+    margin-left: 6px;
+    text-align: center;
+    margin-top: 10px;
+    > span {
+        font-weight: 700;
     }
 `;
 
@@ -40,6 +80,8 @@ export const PostSideContainer = styled.div`
         font-size: 30px;
         margin-top: 15px;
         cursor: pointer;
+        width: 30px;
+        height: 30px;
     }
     > p {
         font-family: var(--primary-font);
