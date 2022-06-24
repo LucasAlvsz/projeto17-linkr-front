@@ -6,10 +6,12 @@ import axios from "axios";
 
 import authorizationHeader from "../utils/authorizationHeader";
 import getUserData from "../utils/getUserData";
+import { LoadingContext } from "./LoadingProvider";
 
 export const PublishContext = createContext();
 
 export const UserPublishProvider = ({ children }) => {
+    const { update, setUpdate } = useContext(LoadingContext);
     const [response, setResponse] = useState(false);
     const authHeader = authorizationHeader(getUserData()?.token);
     const publishSubmit = (data) => {
@@ -27,15 +29,13 @@ export const UserPublishProvider = ({ children }) => {
         });
     };
 
-    const deletePost = async (postId) => {
-        try {
-            await axios.delete(
-                `${process.env.REACT_APP_URI}/post/${postId}`,
-                authHeader,
-            );
-        } catch {
-            console.log("Error");
-        }
+    const deletePost = async (postId, setDeletePost) => {
+        axios
+            .delete(`${process.env.REACT_APP_URI}/post/${postId}`, authHeader)
+            .then(() => {
+                setUpdate(!update);
+                setDeletePost();
+            });
     };
 
     const editPost = async (postId, data) => {

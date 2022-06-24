@@ -5,6 +5,7 @@
     "dependencies": {
         "axios": "^0.27.2",
         "framer-motion": "^6.3.11",
+        "lottie-react": "^2.3.1",
         "react": "^17.0.2",
         "react-debounce-input": "^3.3.0",
         "react-dom": "^17.0.2",

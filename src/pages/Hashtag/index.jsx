@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useLayoutEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 import { TrendingContext } from "../../providers/TrendingProvider";
@@ -11,14 +11,17 @@ import Trending from "../../components/Trending";
 import * as S from "./styles";
 import { LoadingContext } from "../../providers/LoadingProvider";
 import { CommentsContext } from "../../providers/CommentsProvider";
+import LoadingLottie from "../../components/LottieComponents/LoadingLottie";
 
 const Hashtag = () => {
     const navigate = useNavigate();
     const { hashtagPosts, getHashtagPosts } = useContext(TrendingContext);
-    const { update, setUpdate } = useContext(LoadingContext);
+    const { update, setUpdate, loading, setLoading } =
+        useContext(LoadingContext);
     const { comments } = useContext(CommentsContext);
     const { hashtag } = useParams();
-    useEffect(() => {
+    useLayoutEffect(() => {
+        setLoading(true);
         if (!isLogged()) navigate("/sign-in");
         else {
             getHashtagPosts(hashtag);
@@ -32,36 +35,40 @@ const Hashtag = () => {
                 <S.ContentContainer>
                     <S.PostsContainer>
                         <S.HashtagName># {hashtag}</S.HashtagName>
-                        {hashtagPosts.map(
-                            ({
-                                id,
-                                username,
-                                userpic,
-                                likes,
-                                userId,
-                                hasLiked,
-                                article,
-                                link,
-                                countLikes,
-                                urlMetadata,
-                                comments,
-                            }) => (
-                                <Post
-                                    key={id}
-                                    postId={id}
-                                    username={username}
-                                    userPic={userpic}
-                                    userId={userId}
-                                    hasLiked={hasLiked}
-                                    article={article}
-                                    link={link}
-                                    usersLikes={likes}
-                                    countLikes={countLikes}
-                                    urlMetadata={urlMetadata}
-                                    comments={comments}
-                                    update={() => setUpdate(!update)}
-                                />
-                            ),
+                        {loading ? (
+                            <LoadingLottie />
+                        ) : (
+                            hashtagPosts.map(
+                                ({
+                                    id,
+                                    username,
+                                    userpic,
+                                    likes,
+                                    userId,
+                                    hasLiked,
+                                    article,
+                                    link,
+                                    countLikes,
+                                    urlMetadata,
+                                    comments,
+                                }) => (
+                                    <Post
+                                        key={id}
+                                        postId={id}
+                                        username={username}
+                                        userPic={userpic}
+                                        userId={userId}
+                                        hasLiked={hasLiked}
+                                        article={article}
+                                        link={link}
+                                        usersLikes={likes}
+                                        countLikes={countLikes}
+                                        urlMetadata={urlMetadata}
+                                        comments={comments}
+                                        update={() => setUpdate(!update)}
+                                    />
+                                ),
+                            )
                         )}
                     </S.PostsContainer>
                     <S.SidebarContainer>

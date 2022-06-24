@@ -13,7 +13,6 @@ import getUserData from "../../utils/getUserData";
 import { PublishContext } from "../../providers/UserPublishProvider";
 import { LikeContext } from "../../providers/LikeProvider";
 import { CommentsContext } from "../../providers/CommentsProvider";
-import { LoadingContext } from "../../providers/LoadingProvider";
 import { RepostContext } from "../../providers/RepostProvider";
 
 import ScreenDelete from "../ScreendDelete";
@@ -43,7 +42,6 @@ const Post = ({
     const { likePost, buildTooltipMessage } = useContext(LikeContext);
     const { editPost } = useContext(PublishContext);
     const { newRepost } = useContext(RepostContext);
-    const { update } = useContext(LoadingContext);
     const [deletePost, setDeletePost] = useState(false);
     const [editPostState, setEditPostState] = useState(false);
     const [openComments, setOpenComments] = useState(false);
@@ -73,11 +71,10 @@ const Post = ({
                 <S.PostContainer openComments={openComments}>
                     {deletePost && (
                         <ScreenDelete
-                            setDeletePost={(deletePost) =>
+                            setDeletePost={() =>
                                 setDeletePost(!deletePost)
                             }
                             postId={postId}
-                            update={update}
                         />
                     )}
                     <S.PostSideContainer>

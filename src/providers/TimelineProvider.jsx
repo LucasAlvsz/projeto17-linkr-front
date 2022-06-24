@@ -1,15 +1,18 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-console */
 import { createContext, useState } from "react";
+import { useContext } from "react";
 import axios from "axios";
 
 import authorizationHeader from "../utils/authorizationHeader";
 import getUserData from "../utils/getUserData";
+import { LoadingContext } from "./LoadingProvider";
 
 export const TimelineContext = createContext();
 
 export const TimelineProvider = ({ children }) => {
     const [dataPosts, setDataPosts] = useState([]);
+    const { setLoading } = useContext(LoadingContext);
     const authHeader = authorizationHeader(getUserData()?.token);
     const catchPosts = () => {
         if (!authHeader) return catchPosts();
@@ -19,6 +22,7 @@ export const TimelineProvider = ({ children }) => {
         );
         promise.then(({ data }) => {
             setDataPosts(data);
+            setLoading(false);
         });
         promise.catch((res) => {
             console.log(res);

@@ -72,7 +72,7 @@ export const ContentContainer = styled.section`
 `;
 
 export const PostsContainer = styled.div`
-    width: auto;
+    min-width: 612px;
     height: auto;
     display: flex;
     flex-direction: column;
