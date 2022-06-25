@@ -18,7 +18,7 @@ export const Wrapper = styled.div`
 `;
 
 export const PostContainer = styled.div`
-    width: 100vw;
+    width: 100%;
     height: 232px;
     display: flex;
     position: relative;
