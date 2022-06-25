@@ -13,7 +13,7 @@ export const Main = styled.main`
 `;
 
 export const HashtagName = styled.h1`
-    width: 100%;
+    width: 100vw;
     display: flex;
     font-family: var(--secondary-font);
     font-weight: 700;
@@ -24,6 +24,7 @@ export const HashtagName = styled.h1`
     margin-top: calc(45px + 19px);
     padding-left: 17px;
     @media ${device.desktop} {
+        width: 100%;
         font-size: 43px;
         line-height: 64px;
         margin: 53px 0 41px;

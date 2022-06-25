@@ -109,10 +109,8 @@ const Post = ({
                             cancelButton={"No, cancel"}
                             confirmButton={"Yes, share"}
                             modalFunction={() => {
-                                setLoading(true);
-                                newRepost(postId, () => {
-                                    setRepostPost(false);
-                                });
+                                newRepost(postId);
+                                setRepostPost(false);
                             }}
                         />
                     )}

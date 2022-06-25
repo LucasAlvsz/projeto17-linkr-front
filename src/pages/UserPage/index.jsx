@@ -42,18 +42,25 @@ const UserPage = () => {
         <>
             <Header />
             <S.Main>
-                <S.TimelineContainer>{"timeline"}</S.TimelineContainer>
-                <S.UserPublishContainer>
-                    <UserPublish />
-                </S.UserPublishContainer>
                 <S.ContentContainer>
                     <S.PostsContainer>
                         <S.UserData>
                             <div>
-                                <S.UserImage src={userPosts.userpic} />
-                                {`${userPosts.username}'s Posts`}
+                                <S.UserImage src={userPosts?.userpic} />
+                                {userPosts.username &&
+                                    `${userPosts.username}'s Posts`}
                             </div>
-                            {/* <button>Follow</button> */}
+                            <S.ButtonFollowMobile
+                                userId={id}
+                                userIdStorage={userIdStorage}
+                                isFollower={isFollower}
+                                onClick={async () => {
+                                    await followOrUnfollow(id, isFollower);
+                                    setUpdate(!update);
+                                }}
+                            >
+                                {isFollower ? "Following" : "Follow"}
+                            </S.ButtonFollowMobile>
                         </S.UserData>
                         {loading ? (
                             <LoadingLottie />

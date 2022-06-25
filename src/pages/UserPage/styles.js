@@ -3,7 +3,7 @@ import device from "../../utils/devicesSizes";
 
 export const Main = styled.main`
     width: 100%;
-    height: calc(100vh - 72px);
+    height: calc(100vh - 146px);
     z-index: -2;
     position: absolute;
     display: flex;
@@ -12,11 +12,12 @@ export const Main = styled.main`
     margin-top: calc(72px + 74px);
     @media ${device.desktop} {
         margin-top: 72px;
+        height: calc(100vh - 72px);
     }
 `;
 
 export const UserData = styled.h1`
-    width: 100%;
+    width: 100vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -26,16 +27,6 @@ export const UserData = styled.h1`
     line-height: 49px;
     color: var(--secondary-color);
     margin: 19px 17px 19px;
-    display: none;
-    /* button {
-        width: 112px;
-        height: 31px;
-        border-radius: 5px;
-        background-color: var(--color-button);
-        font-weight: 700;
-        display: none;
-    } */
-
     div {
         align-items: center;
         display: flex;
@@ -51,6 +42,7 @@ export const UserData = styled.h1`
     }
 
     @media ${device.desktop} {
+        width: 100%;
         button {
             display: flex;
             align-items: center;
@@ -66,6 +58,18 @@ export const UserData = styled.h1`
     }
 `;
 
+export const ButtonFollowMobile = styled.button`
+    @media ${device.sidebar} {
+        width: 112px;
+        height: 31px;
+        border-radius: 5px;
+        background-color: var(--color-button);
+        font-weight: 700;
+        visibility: hidden;
+    }
+    visibility: visible;
+`;
+
 export const ContentContainer = styled.section`
     width: 100%;
     height: auto;
@@ -74,12 +78,12 @@ export const ContentContainer = styled.section`
 `;
 
 export const PostsContainer = styled.div`
-    min-width: 612px;
     height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     @media ${device.sidebar} {
+        min-width: 612px;
         margin-right: 25px;
     }
 `;
