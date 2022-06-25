@@ -1,56 +1,45 @@
 import axios from "axios";
-import { createContext, useState } from "react";
+import { createContext, useContext } from "react";
+
+import { LoadingContext } from "./LoadingProvider";
+
 import authorizationHeader from "../utils/authorizationHeader";
 import getUserData from "../utils/getUserData";
 
 export const LikeContext = createContext();
 
 export const LikeProvider = ({ children }) => {
-    const [userLikes, setUserLikes] = useState([]);
-
-    const authHeader = authorizationHeader(getUserData()?.token);
-
-    const likeMessage = (postId) => {
-        axios.post(
-            `${process.env.REACT_APP_URI}/likes`,
-            { postId },
-            authHeader,
-        );
-    };
-    const getLikes = () => {
+    const { update, setUpdate } = useContext(LoadingContext);
+    let authHeader;
+    const likePost = (postId) => {
+        authHeader = authorizationHeader(getUserData()?.token);
         axios
-            .get(`${process.env.REACT_APP_URI}/likes`, authHeader)
-            .then(({ data }) => setUserLikes(data));
+            .post(
+                `${process.env.REACT_APP_URI}/likes/${postId}`,
+                {},
+                authHeader,
+            )
+            .then(() => setUpdate(!update))
+            .catch((err) => console.log(err, "//viana faça"));
     };
-    const filterLikesPost = (postId) => {
-        return userLikes.filter((like) => like.postId === postId);
-    };
-    const buildTooltipMessage = (usersLikes) => {
-        const userIdStorage = getUserData().userId;
-        const userLiked = usersLikes.find(
-            (like) => like.userId === userIdStorage,
-        );
-        if (userLiked) {
-            const length = usersLikes.length;
-            const theTwoFirst = usersLikes.filter(
-                (people) => people.userId !== userIdStorage,
-            );
+
+    const buildTooltipMessage = (hasLiked, countLikes, usersLikes) => {
+        authHeader = authorizationHeader(getUserData()?.token);
+        countLikes = parseInt(countLikes);
+        if (hasLiked) {
             const message =
-                length === 1
+                countLikes === 1
                     ? "Você"
-                    : `Você, ${theTwoFirst[0]?.username} e outras ${
-                        length - 2
-                    } pessoas`;
+                    : `Você, ${usersLikes[0]?.username} and other 
+                    ${countLikes - 2} people`;
             return message;
         } else {
-            const length = usersLikes.length;
-            const theTwoFirst = usersLikes.slice(0, 2);
             const message =
-                length === 1
-                    ? `${theTwoFirst[0]?.username}`
-                    : `${theTwoFirst[0]?.username}, ${
-                        theTwoFirst[1]?.username
-                    } e outras ${length - 1} pessoas`;
+                countLikes === 1
+                    ? `${usersLikes[0]?.username}`
+                    : `${usersLikes[0]?.username}, 
+                    ${usersLikes[1]?.username} e outras 
+                    ${countLikes - 2} pessoas`;
             return message;
         }
     };
@@ -58,9 +47,7 @@ export const LikeProvider = ({ children }) => {
     return (
         <LikeContext.Provider
             value={{
-                likeMessage,
-                getLikes,
-                filterLikesPost,
+                likePost,
                 buildTooltipMessage,
             }}
         >

@@ -3,6 +3,8 @@ import device from "../../utils/devicesSizes";
 
 export const Main = styled.main`
     width: 100%;
+    z-index: -2;
+    position: absolute;
     height: calc(100vh - 72px);
     display: flex;
     flex-direction: column;
@@ -44,6 +46,7 @@ export const PostsContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+
     @media ${device.sidebar} {
         margin-right: 25px;
     }
@@ -74,6 +77,7 @@ export const UserImage = styled.div`
 `;
 
 export const UserPublishContainer = styled.div`
+    z-index: 1;
     @media (max-width: 611px) {
         width: 100%;
     }

@@ -2,6 +2,21 @@
 import styled from "styled-components";
 import device from "../../utils/devicesSizes";
 
+export const Wrapper = styled.div`
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 16px;
+    > span {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        margin-top: ${({ isRepost }) => (isRepost ? "36px" : "0")};
+    }
+`;
+
 export const PostContainer = styled.div`
     width: 100vw;
     height: 232px;
@@ -10,12 +25,47 @@ export const PostContainer = styled.div`
     align-items: center;
     background-color: var(--primary-color);
     padding: 10px 15px 15px;
-    margin-bottom: 16px;
     @media ${device.desktop} {
         max-width: 611px;
         height: 276px;
         padding: 18px;
-        border-radius: 16px;
+        border-radius: ${({ openComments }) =>
+            openComments ? "16px 16px 0 0" : "16px 16px 16px 16px"};
+    }
+`;
+
+export const repostContainer = styled.div`
+    position: absolute;
+    top: -33px;
+    left: 0;
+    width: 100%;
+    height: 66px;
+    display: flex;
+    background: #1e1e1e;
+    border-radius: 16px;
+    padding: 0 13px;
+`;
+
+export const RepostedBy = styled.div`
+    width: auto;
+    height: 20px;
+    display: flex;
+    font-family: var(--primary-font);
+    font-size: 11px;
+    line-height: 13px;
+    color: #ffffff;
+    svg {
+        margin-top: 11px;
+    }
+`;
+
+export const RepostedByText = styled.p`
+    font-weight: 400;
+    margin-left: 6px;
+    text-align: center;
+    margin-top: 10px;
+    > span {
+        font-weight: 700;
     }
 `;
 
@@ -27,14 +77,18 @@ export const PostSideContainer = styled.div`
     align-items: center;
     color: white;
     > svg {
-        font-size: 36px;
-        margin: 12px 0;
+        font-size: 30px;
+        margin-top: 15px;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
     }
     > p {
-        font-family: "Lato";
-        font-size: 16px;
-        width: 60px;
+        font-family: var(--primary-font);
+        font-size: 11px;
+        line-height: 13px;
         text-align: center;
+        width: 65px;
     }
 `;
 
@@ -202,5 +256,59 @@ export const PostLinkImage = styled.img`
     @media ${device.desktop} {
         width: 155px;
         height: 155px;
+    }
+`;
+
+export const CommentsContainer = styled.div`
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #1e1e1e;
+    padding: 20px;
+    margin-bottom: 16px;
+    @media ${device.desktop} {
+        top: 276px;
+        margin-bottom: 28px;
+        border-radius: 0 0 16px 16px;
+    }
+    img {
+        width: 40px;
+        height: 40px;
+        border-radius: 26.5px;
+        margin-left: 5px;
+        margin-bottom: 16px;
+        @media ${device.desktop} {
+            width: 50px;
+            height: 50px;
+        }
+    }
+`;
+
+export const WriteCommentContainer = styled.div`
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    img {
+        margin-bottom: 0;
+        margin-right: 15px;
+    }
+    form {
+        width: 100%;
+    }
+    input {
+        width: 100%;
+        height: 39px;
+        border-radius: 8px;
+        background: #252525;
+        padding: 0 15px;
+        color: #acacac;
+        ::placeholder {
+            font-style: italic;
+            letter-spacing: 0.05em;
+            color: #575757;
+        }
     }
 `;

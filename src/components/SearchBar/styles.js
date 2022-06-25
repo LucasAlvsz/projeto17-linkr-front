@@ -62,6 +62,13 @@ const SearchBarDataResult = styled.div`
     a:first-child {
         margin-top: calc(45px + 14px / 2);
     }
+
+    span {
+        font-family: var(--primary-font);
+        color: #c5c5c5;
+        font-size: 19px;
+        margin-left: 7px;
+    }
 `;
 
 const UserImage = styled.div`
