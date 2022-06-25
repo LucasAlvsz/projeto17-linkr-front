@@ -10,8 +10,9 @@ export const LikeContext = createContext();
 
 export const LikeProvider = ({ children }) => {
     const { update, setUpdate } = useContext(LoadingContext);
-    const authHeader = authorizationHeader(getUserData()?.token);
+    let authHeader;
     const likePost = (postId) => {
+        authHeader = authorizationHeader(getUserData()?.token);
         axios
             .post(
                 `${process.env.REACT_APP_URI}/likes/${postId}`,
@@ -22,9 +23,10 @@ export const LikeProvider = ({ children }) => {
             .catch((err) => console.log(err, "//viana faça"));
     };
 
-    const buildTooltipMessage = (userLiked, countLikes, usersLikes) => {
+    const buildTooltipMessage = (hasLiked, countLikes, usersLikes) => {
+        authHeader = authorizationHeader(getUserData()?.token);
         countLikes = parseInt(countLikes);
-        if (userLiked) {
+        if (hasLiked) {
             const message =
                 countLikes === 1
                     ? "Você"

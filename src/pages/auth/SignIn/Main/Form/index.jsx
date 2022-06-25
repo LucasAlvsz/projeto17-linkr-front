@@ -6,7 +6,6 @@ import { AuthContext } from "../../../../../providers/AuthProvider";
 import * as S from "./../../../styles";
 import Inputs from "./Inputs";
 import SubmitButton from "./SubmitButton";
-//import handleError from "./../../../../../utils/handleError";
 
 const Form = () => {
     const navigate = useNavigate();
@@ -17,10 +16,9 @@ const Form = () => {
     });
     const handleSignIn = async (e) => {
         e.preventDefault();
-        signIn(signInData.email, signInData.password);
-        setTimeout(() => {
-            navigate("/timeline");
-        }, 1500);
+        signIn(signInData.email, signInData.password, () =>
+            navigate("/timeline"),
+        );
     };
     return (
         <S.Form onSubmit={handleSignIn}>

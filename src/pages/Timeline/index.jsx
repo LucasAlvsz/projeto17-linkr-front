@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { TimelineContext } from "../../providers/TimelineProvider";
@@ -13,18 +13,18 @@ import UserPublish from "../../components/UserPublish";
 import UpdatePosts from "../../components/UpdatePosts";
 
 import * as S from "./style";
+import LoadingLottie from "../../components/LottieComponents/LoadingLottie";
 
 const Timeline = () => {
     const navigate = useNavigate();
-    const { dataPosts, catchPosts } = useContext(TimelineContext);
-    const { update } = useContext(LoadingContext);
+    const { dataPosts, catchPosts, newPosts } = useContext(TimelineContext);
+    const { update, loading } = useContext(LoadingContext);
     const { comments } = useContext(CommentsContext);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (!isLogged()) navigate("/sign-in");
         else catchPosts();
     }, [update, comments]);
-    uploadNewPosts();
     return (
         <>
             <Header />
@@ -36,41 +36,48 @@ const Timeline = () => {
                         <S.UserPublishContainer>
                             <UserPublish />
                         </S.UserPublishContainer>
-                        {dataPosts?.map(
-                            ({
-                                id,
-                                username,
-                                userPic,
-                                userId,
-                                article,
-                                link,
-                                urlMetadata,
-                                comments,
-                                isRepost,
-                                repostedBy,
-                                repostsCount,
-                                likes,
-                                countLikes,
-                                hasLiked,
-                            }) => (
-                                <Post
-                                    key={isRepost ? id + Math.random() : id} //viana faça
-                                    postId={id}
-                                    username={username}
-                                    userPic={userPic}
-                                    userId={userId}
-                                    article={article}
-                                    link={link}
-                                    urlMetadata={urlMetadata}
-                                    comments={comments}
-                                    isRepost={isRepost}
-                                    repostedBy={repostedBy}
-                                    repostsCount={repostsCount}
-                                    usersLikes={likes}
-                                    countLikes={countLikes}
-                                    hasLiked={hasLiked}
-                                />
-                            ),
+                        <UpdatePosts numberPosts={newPosts.length} />
+                        {loading ? (
+                            <LoadingLottie />
+                        ) : (
+                            dataPosts?.map(
+                                ({
+                                    id,
+                                    username,
+                                    userPic,
+                                    userId,
+                                    article,
+                                    link,
+                                    urlMetadata,
+                                    comments,
+                                    isRepost,
+                                    repostedBy,
+                                    repostedById,
+                                    repostsCount,
+                                    likes,
+                                    countLikes,
+                                    hasLiked,
+                                }) => (
+                                    <Post
+                                        key={isRepost ? id + Math.random() : id}
+                                        postId={id}
+                                        username={username}
+                                        userPic={userPic}
+                                        userId={userId}
+                                        article={article}
+                                        link={link}
+                                        urlMetadata={urlMetadata}
+                                        comments={comments}
+                                        isRepost={isRepost}
+                                        repostedBy={repostedBy}
+                                        repostedById={repostedById}
+                                        repostsCount={repostsCount}
+                                        usersLikes={likes}
+                                        countLikes={countLikes}
+                                        hasLiked={hasLiked}
+                                    />
+                                ),
+                            )
                         )}
                     </S.PostsContainer>
                     <S.SidebarContainer>

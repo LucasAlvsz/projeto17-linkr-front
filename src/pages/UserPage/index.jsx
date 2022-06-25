@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useLayoutEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 import { UserPageContext } from "../../providers/UserPageProvider";
@@ -9,11 +9,11 @@ import Header from "../../components/Header";
 import Post from "../../components/Post";
 import Trending from "../../components/Trending";
 import UserPublish from "../../components/UserPublish";
+import { LoadingContext } from "../../providers/LoadingProvider";
+import { CommentsContext } from "../../providers/CommentsProvider";
+import LoadingLottie from "../../components/LottieComponents/LoadingLottie";
 
 import * as S from "./styles";
-import { LoadingContext } from "../../providers/LoadingProvider";
-import { LikeContext } from "../../providers/LikeProvider";
-import { CommentsContext } from "../../providers/CommentsProvider";
 
 const UserPage = () => {
     const navigate = useNavigate();
@@ -24,21 +24,20 @@ const UserPage = () => {
         isFollower,
         followOrUnfollow,
     } = useContext(UserPageContext);
-    const { getLikes, filterLikesPost } = useContext(LikeContext);
-    const { update, setUpdate } = useContext(LoadingContext);
+    const { update, setUpdate, loading, setLoading } =
+        useContext(LoadingContext);
     const { comments } = useContext(CommentsContext);
     const { id } = useParams();
     const userIdStorage = getUserData().userId;
 
-    useEffect(() => {
+    useLayoutEffect(() => {
+        setLoading(true);
         if (!isLogged()) navigate("/sign-in");
         else {
             getUserPosts(id);
-            getLikes();
             amIFollower(id);
         }
     }, [id, update, comments]);
-
     return (
         <>
             <Header />
@@ -56,33 +55,42 @@ const UserPage = () => {
                             </div>
                             {/* <button>Follow</button> */}
                         </S.UserData>
-                        {userPosts.posts?.map(
-                            ({
-                                id,
-                                username,
-                                userpic,
-                                likes,
-                                userId,
-                                article,
-                                link,
-                                urlMetadata,
-                                comments,
-                            }) => (
-                                <Post
-                                    key={id}
-                                    postId={id}
-                                    username={username}
-                                    userpic={userpic}
-                                    userid={userId}
-                                    article={article}
-                                    usersLikes={filterLikesPost(id)}
-                                    link={link}
-                                    likes={likes}
-                                    urlMetadata={urlMetadata}
-                                    comments={comments}
-                                    update={() => setUpdate(!update)}
-                                />
-                            ),
+                        {loading ? (
+                            <LoadingLottie />
+                        ) : (
+                            userPosts.posts?.map(
+                                ({
+                                    id,
+                                    username,
+                                    userPic,
+                                    userId,
+                                    article,
+                                    link,
+                                    urlMetadata,
+                                    comments,
+                                    repostsCount,
+                                    likes,
+                                    countLikes,
+                                    hasLiked,
+                                }) => (
+                                    <Post
+                                        key={id}
+                                        postId={id}
+                                        username={username}
+                                        userPic={userPic}
+                                        userId={userId}
+                                        article={article}
+                                        link={link}
+                                        urlMetadata={urlMetadata}
+                                        comments={comments}
+                                        repostsCount={repostsCount}
+                                        usersLikes={likes}
+                                        countLikes={countLikes}
+                                        hasLiked={hasLiked}
+                                        update={() => setUpdate(!update)}
+                                    />
+                                ),
+                            )
                         )}
                     </S.PostsContainer>
                     <S.SidebarContainer>

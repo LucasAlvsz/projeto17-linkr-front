@@ -4,6 +4,8 @@ import device from "../../utils/devicesSizes";
 export const Main = styled.main`
     width: 100%;
     height: calc(100vh - 72px);
+    z-index: -2;
+    position: absolute;
     display: flex;
     flex-direction: column;
     overflow: auto;
@@ -72,7 +74,7 @@ export const ContentContainer = styled.section`
 `;
 
 export const PostsContainer = styled.div`
-    width: auto;
+    min-width: 612px;
     height: auto;
     display: flex;
     flex-direction: column;
