@@ -10,14 +10,14 @@ import Header from "../../components/Header";
 import Post from "../../components/Post";
 import Trending from "../../components/Trending";
 import UserPublish from "../../components/UserPublish";
-// import UpdatePosts from "../../components/UpdatePosts";
+import UpdatePosts from "../../components/UpdatePosts";
 
 import * as S from "./style";
 import LoadingLottie from "../../components/LottieComponents/LoadingLottie";
 
 const Timeline = () => {
     const navigate = useNavigate();
-    const { dataPosts, catchPosts } = useContext(TimelineContext);
+    const { dataPosts, catchPosts, newPosts } = useContext(TimelineContext);
     const { update, loading } = useContext(LoadingContext);
     const { comments } = useContext(CommentsContext);
 
@@ -36,6 +36,7 @@ const Timeline = () => {
                         <S.UserPublishContainer>
                             <UserPublish />
                         </S.UserPublishContainer>
+                        <UpdatePosts numberPosts={newPosts.length} />
                         {loading ? (
                             <LoadingLottie />
                         ) : (
