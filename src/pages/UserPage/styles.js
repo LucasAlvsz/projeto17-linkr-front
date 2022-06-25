@@ -17,7 +17,7 @@ export const Main = styled.main`
 `;
 
 export const UserData = styled.h1`
-    width: 100%;
+    width: 100vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -42,6 +42,7 @@ export const UserData = styled.h1`
     }
 
     @media ${device.desktop} {
+        width: 100%;
         button {
             display: flex;
             align-items: center;
@@ -77,12 +78,12 @@ export const ContentContainer = styled.section`
 `;
 
 export const PostsContainer = styled.div`
-    min-width: 612px;
     height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     @media ${device.sidebar} {
+        min-width: 612px;
         margin-right: 25px;
     }
 `;

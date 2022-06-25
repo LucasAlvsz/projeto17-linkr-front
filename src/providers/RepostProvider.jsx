@@ -1,12 +1,15 @@
 import axios from "axios";
 import { createContext } from "react";
+import { useContext } from "react";
 
 import authorizationHeader from "../utils/authorizationHeader";
 import getUserData from "../utils/getUserData";
+import { LoadingContext } from "./LoadingProvider";
 
 export const RepostContext = createContext();
 
 export const RepostProvider = ({ children }) => {
+    const { update, setUpdate } = useContext(LoadingContext);
     let authHeader;
 
     const newRepost = (postId) => {
@@ -17,7 +20,7 @@ export const RepostProvider = ({ children }) => {
                 {},
                 authHeader,
             )
-            .then()
+            .then(() => setUpdate(!update))
             .catch((err) => console.log(err));
     };
 
